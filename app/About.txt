@@ -1,0 +1,55 @@
+1.55 (08-08-15)
+- Added the password validation.
+- set the password.
+- changed the app installation minimum version to 14.
+- Removed the unnecessary code.
+
+1.52 (08-08-15)
+- Implemented the Categories entries support for the categories from the list.
+- Fixed the minor bugs while saving.
+- Shown messages to user when delete or saved.
+- Implemented save and delete for the each categories entry.
+- Added the home about setting.
+1.6 (09-08-15)
+- Added the current password the change password setting.
+- Redirected to home once password is set.
+- Added the default templates
+	1. Emails
+	2. Cards
+	3. Mobile apps
+	4. Web accounts
+	5. 
+
+
+1.52 (07-08-15)
+- Implemented the Edit support for the categories from the list.
+- Fixed the minor bugs while saving.
+- Shown messages to user when delete or saved.
+
+1.51 (06-08-15)
+- Created the dynamic fields.
+- Added the basic validations for the fields.
+
+1.42 (04-08-15)
+- Added show password in main page.
+- Removed the password from List view page.
+- Set the home as List view for the Detail view
+- Shown the Settings and about dialogue menu in ListViewPage.
+- Added a default template for about dialogue.
+
+1.41 (03-08-15)
+- set error message if password is wrong.
+- removed the action bar from main page.
+
+1.4 (31-07-2015)
+- Add the SQLite database support.
+- Added the base email type category.
+- Added the login password error message.
+
+1.3 (30-07-2015)
+Added the validations.
+changed to text view in the edit dialog.
+
+1.2 (29-07-2015)
+- Added actionbar theme.
+- Added Edit and delete support.
