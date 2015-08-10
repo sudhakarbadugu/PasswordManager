@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dip">
+    android:padding="20dip"
+    android:background="@drawable/wooden_background_9">
 
     <TextView
         android:layout_width="match_parent"

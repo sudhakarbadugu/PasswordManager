@@ -7,14 +7,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.blmsr.manager.MainActivity"
-    android:background="@color/blue"
+    android:background="@drawable/wooden_background_12"
     >
 
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
         android:padding="10dp"
         android:text="@string/lbl_enter_password"
         android:textColor="@android:color/white"
