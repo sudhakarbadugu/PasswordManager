@@ -1,0 +1,181 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* FloatingActionButton-master\
+* FloatingActionButton-master\.gitignore
+* FloatingActionButton-master\LICENSE.MD
+* FloatingActionButton-master\README.md
+* FloatingActionButton-master\art\
+* FloatingActionButton-master\art\demo.gif
+* FloatingActionButton-master\build.gradle
+* FloatingActionButton-master\gradle.properties
+* FloatingActionButton-master\gradle\
+* FloatingActionButton-master\gradle\wrapper\
+* FloatingActionButton-master\gradle\wrapper\gradle-wrapper.jar
+* FloatingActionButton-master\gradle\wrapper\gradle-wrapper.properties
+* FloatingActionButton-master\gradlew
+* FloatingActionButton-master\gradlew.bat
+* FloatingActionButton-master\library\
+* FloatingActionButton-master\library\.gitignore
+* FloatingActionButton-master\library\build.gradle
+* FloatingActionButton-master\library\gradle.properties
+* FloatingActionButton-master\library\proguard-rules.txt
+* FloatingActionButton-master\library\src\
+* FloatingActionButton-master\library\src\main\
+* FloatingActionButton-master\library\src\main\AndroidManifest.xml
+* FloatingActionButton-master\library\src\main\java\
+* FloatingActionButton-master\library\src\main\java\com\
+* FloatingActionButton-master\library\src\main\java\com\melnykov\
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\AbsListViewScrollDetector.java
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\FloatingActionButton.java
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\ObservableScrollView.java
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\RecyclerViewScrollDetector.java
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\ScrollDirectionListener.java
+* FloatingActionButton-master\library\src\main\java\com\melnykov\fab\ScrollViewScrollDetector.java
+* FloatingActionButton-master\library\src\main\res\
+* FloatingActionButton-master\library\src\main\res\anim-v21\
+* FloatingActionButton-master\library\src\main\res\anim-v21\fab_press_elevation.xml
+* FloatingActionButton-master\library\src\main\res\drawable-hdpi\
+* FloatingActionButton-master\library\src\main\res\drawable-hdpi\fab_shadow.png
+* FloatingActionButton-master\library\src\main\res\drawable-hdpi\fab_shadow_mini.png
+* FloatingActionButton-master\library\src\main\res\drawable-mdpi\
+* FloatingActionButton-master\library\src\main\res\drawable-mdpi\fab_shadow.png
+* FloatingActionButton-master\library\src\main\res\drawable-mdpi\fab_shadow_mini.png
+* FloatingActionButton-master\library\src\main\res\drawable-xhdpi\
+* FloatingActionButton-master\library\src\main\res\drawable-xhdpi\fab_shadow.png
+* FloatingActionButton-master\library\src\main\res\drawable-xhdpi\fab_shadow_mini.png
+* FloatingActionButton-master\library\src\main\res\drawable-xxhdpi\
+* FloatingActionButton-master\library\src\main\res\drawable-xxhdpi\fab_shadow.png
+* FloatingActionButton-master\library\src\main\res\drawable-xxhdpi\fab_shadow_mini.png
+* FloatingActionButton-master\library\src\main\res\drawable-xxxhdpi\
+* FloatingActionButton-master\library\src\main\res\drawable-xxxhdpi\fab_shadow.png
+* FloatingActionButton-master\library\src\main\res\drawable-xxxhdpi\fab_shadow_mini.png
+* FloatingActionButton-master\library\src\main\res\values\
+* FloatingActionButton-master\library\src\main\res\values\attrs.xml
+* FloatingActionButton-master\library\src\main\res\values\colors.xml
+* FloatingActionButton-master\library\src\main\res\values\dimens.xml
+* FloatingActionButton-master\library\src\main\res\values\info_strings.xml
+* FloatingActionButton-master\sample.apk
+* FloatingActionButton-master\sample\
+* FloatingActionButton-master\sample\.gitignore
+* FloatingActionButton-master\sample\build.gradle
+* FloatingActionButton-master\sample\src\
+* FloatingActionButton-master\sample\src\main\
+* FloatingActionButton-master\sample\src\main\AndroidManifest.xml
+* FloatingActionButton-master\sample\src\main\java\
+* FloatingActionButton-master\sample\src\main\java\com\
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\fab\
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\fab\sample\
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\fab\sample\DividerItemDecoration.java
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\fab\sample\ListViewAdapter.java
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\fab\sample\MainActivity.java
+* FloatingActionButton-master\sample\src\main\java\com\melnykov\fab\sample\RecyclerViewAdapter.java
+* FloatingActionButton-master\sample\src\main\res\
+* FloatingActionButton-master\sample\src\main\res\drawable-hdpi\
+* FloatingActionButton-master\sample\src\main\res\drawable-hdpi\ic_add_white_24dp.png
+* FloatingActionButton-master\sample\src\main\res\drawable-hdpi\ic_launcher.png
+* FloatingActionButton-master\sample\src\main\res\drawable-mdpi\
+* FloatingActionButton-master\sample\src\main\res\drawable-mdpi\ic_add_white_24dp.png
+* FloatingActionButton-master\sample\src\main\res\drawable-mdpi\ic_launcher.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xhdpi\
+* FloatingActionButton-master\sample\src\main\res\drawable-xhdpi\ic_add_white_24dp.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xhdpi\ic_launcher.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\at.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\au.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\br.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ca.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ch.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\cl.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\cn.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\cz.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\de.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\dk.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ee.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\fi.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\fr.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\gr.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\hr.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\hu.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ic_add_white_24dp.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ic_launcher.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ie.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\in.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\is.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\it.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\lt.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\lv.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\nl.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\no.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\nz.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\se.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\ua.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxhdpi\us.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxxhdpi\
+* FloatingActionButton-master\sample\src\main\res\drawable-xxxhdpi\ic_add_white_24dp.png
+* FloatingActionButton-master\sample\src\main\res\drawable-xxxhdpi\ic_launcher.png
+* FloatingActionButton-master\sample\src\main\res\drawable\
+* FloatingActionButton-master\sample\src\main\res\drawable\divider.xml
+* FloatingActionButton-master\sample\src\main\res\layout\
+* FloatingActionButton-master\sample\src\main\res\layout\about_view.xml
+* FloatingActionButton-master\sample\src\main\res\layout\fragment_listview.xml
+* FloatingActionButton-master\sample\src\main\res\layout\fragment_recyclerview.xml
+* FloatingActionButton-master\sample\src\main\res\layout\fragment_scrollview.xml
+* FloatingActionButton-master\sample\src\main\res\layout\list_item.xml
+* FloatingActionButton-master\sample\src\main\res\menu\
+* FloatingActionButton-master\sample\src\main\res\menu\main.xml
+* FloatingActionButton-master\sample\src\main\res\values-v21\
+* FloatingActionButton-master\sample\src\main\res\values-v21\styles.xml
+* FloatingActionButton-master\sample\src\main\res\values\
+* FloatingActionButton-master\sample\src\main\res\values\arrays.xml
+* FloatingActionButton-master\sample\src\main\res\values\colors.xml
+* FloatingActionButton-master\sample\src\main\res\values\strings.xml
+* FloatingActionButton-master\sample\src\main\res\values\styles.xml
+* FloatingActionButton-master\settings.gradle
+* ic_launcher-web.png
+* proguard-project.txt
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:22.2.1
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app\src\main\AndroidManifest.xml
+* assets\ => app\src\main\assets
+* res\ => app\src\main\res\
+* src\ => app\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

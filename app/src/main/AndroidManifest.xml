@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.blmsr.manager"
+    android:versionCode="1"
+    android:versionName="1.6" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="21" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/CustomActionBarTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CategoryEntriesListActivity"
+            android:label="@string/title_cards"
+            android:parentActivityName=".DisplayCategoriesListActivity">
+        </activity>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/title_editor" >
+        </activity>
+        <activity
+            android:name=".CategoryEntriesEditorActivity"
+            android:label="@string/title_editor"
+            android:parentActivityName=".CategoryEntriesListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CategoryEntriesListActivity" />
+        </activity>
+        <activity
+            android:name=".CategoryHomeActivity"
+            android:label="@string/title_activity_category_home" >
+        </activity>
+        <activity
+            android:name=".CategoryEditorActivity"
+            android:label="@string/title_activity_category_editor"
+            android:parentActivityName=".CategoriesListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CategoriesListActivity" />
+        </activity>
+        <activity
+            android:name=".CategoriesListActivity"
+            android:label="@string/title_activity_categories_list"
+            android:parentActivityName=".CategoryHomeActivity" >
+        </activity>
+        <activity
+            android:name=".DisplayCategoriesListActivity"
+            android:label="@string/title_activity_display_categories_list"
+            android:parentActivityName=".CategoryHomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.blmsr.manager.CategoryHomeActivity" />
+        </activity>
+    </application>
+
+</manifest>
