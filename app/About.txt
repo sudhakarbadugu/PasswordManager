@@ -1,5 +1,8 @@
+1.62 (11-08-15)
+- Added the app icon.
+- Changed the delete and ok buttons.
 
-1.62 (08-08-15)
+1.62 (10-08-15)
 - Added the back ground screens for each activity.
 
 1.61 (09-08-15)

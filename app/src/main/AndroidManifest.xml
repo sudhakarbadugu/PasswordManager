@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blmsr.manager"
     android:versionCode="1"
-    android:versionName="1.62">
+    android:versionName="1.63">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -10,11 +10,11 @@
 
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="21" />
+        android:maxSdkVersion="22" />
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="21" />
+        android:maxSdkVersion="22" />
 
     <application
         android:allowBackup="true"

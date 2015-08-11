@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.blmsr.manager.CategoryEditorActivity">
+    tools:context="com.blmsr.manager.CategoryEntriesEditorActivity">
 
     <!-- Edot, should appear as action button -->
     <item
@@ -10,11 +10,12 @@
         android:showAsAction="ifRoom"
         />
 
+
     <!-- Edot, should appear as action button -->
     <item
         android:id="@+id/action_save"
         android:icon="@drawable/ic_done_black_48dp"
-        android:title="@string/action_search"
+        android:title="@string/lbl_save"
         android:showAsAction="ifRoom"
         />
 </menu>

@@ -38,7 +38,7 @@ public class CategoryEntriesEditorActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categiry_editor);
+        setContentView(R.layout.activity_category_entries_editor);
         itsRootRelativeLayout = (LinearLayout) getWindow().getDecorView().findViewById(R.id.rootLinearLayout);
         Intent anIntent = getIntent();
          {
@@ -67,7 +67,7 @@ public class CategoryEntriesEditorActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_categiry_editor, menu);
+        getMenuInflater().inflate(R.menu.menu_category_entries_editor, menu);
         return true;
     }
 
