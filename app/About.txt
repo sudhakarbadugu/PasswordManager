@@ -1,15 +1,14 @@
-1.55 (08-08-15)
-- Added the password validation.
-- set the password.
-- changed the app installation minimum version to 14.
-- Removed the unnecessary code.
 
-1.52 (08-08-15)
+1.62 (08-08-15)
+- Added the back ground screens for each activity.
+
+1.61 (09-08-15)
 - Implemented the Categories entries support for the categories from the list.
 - Fixed the minor bugs while saving.
 - Shown messages to user when delete or saved.
 - Implemented save and delete for the each categories entry.
 - Added the home about setting.
+
 1.6 (09-08-15)
 - Added the current password the change password setting.
 - Redirected to home once password is set.
