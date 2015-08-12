@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blmsr.manager.models.CategoryEntry;
@@ -42,7 +43,13 @@ public class CategoryEntriesListAdapter extends ArrayAdapter<CategoryEntry> {
 		if (aData[position] != null) {
 			if (t != null)
 				t.setText(aData[position].getCategoryName());
-		}
+        }
+
+        ImageView anImageView = (ImageView) convertView.findViewById(R.id.imageView);
+        if (aData[position] != null) {
+            if (anImageView != null)
+                anImageView.setImageResource(R.drawable.ic_email_black_36dp);
+        }
 
 		return convertView;
 	}

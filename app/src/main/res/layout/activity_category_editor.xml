@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:id="@+id/addCategiryNameItem"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -47,13 +47,14 @@
             android:hint="@string/lbl_category_name"
             android:inputType="textAutoComplete" />
 
-        <TextView
-            android:id="@+id/categoryIconName1"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/lbl_category_icon_name"
-            android:textStyle="bold"
-            />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_email_black_24dp"
+            android:contentDescription="test" />
 
     </LinearLayout>
 
@@ -117,6 +118,5 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 
 </LinearLayout>

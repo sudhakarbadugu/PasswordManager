@@ -90,4 +90,12 @@ public class CategoriesListActivity extends ListActivity {
                 CategoryEditorActivity.class);
         startActivity(anIntent);
     }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(CLASSNAME, "back press button");
+        Intent anIntent = new Intent(this,
+                DisplayCategoriesListActivity.class);
+        startActivity(anIntent);
+    }
 }

@@ -1,4 +1,9 @@
-1.62 (11-08-15)
+1.64 (12-08-15)
+- Fixed the list size issue.
+- Changed the icon for the categories.
+- added the deleted icons.
+
+1.63 (11-08-15)
 - Added the app icon.
 - Changed the delete and ok buttons.
 
