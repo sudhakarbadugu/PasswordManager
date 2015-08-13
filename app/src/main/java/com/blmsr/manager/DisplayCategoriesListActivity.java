@@ -3,6 +3,7 @@ package com.blmsr.manager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,11 @@ public class DisplayCategoriesListActivity extends CategoriesListActivity {
         anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
         anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsCategoriesList.get(position));
         startActivity(anIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 
 }

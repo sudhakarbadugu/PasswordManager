@@ -5,16 +5,15 @@
     <!-- Edot, should appear as action button -->
     <item
         android:id="@+id/action_delete"
-        android:icon="@drawable/ic_delete_black_48dp"
+        android:icon="@drawable/ic_delete_white_48dp"
         android:title="@string/action_delete"
         android:showAsAction="ifRoom"
         />
 
-
     <!-- Edot, should appear as action button -->
     <item
         android:id="@+id/action_save"
-        android:icon="@drawable/ic_done_black_48dp"
+        android:icon="@drawable/ic_done_white_48dp"
         android:title="@string/lbl_save"
         android:showAsAction="ifRoom"
         />

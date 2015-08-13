@@ -1,8 +1,11 @@
 package com.blmsr.manager;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -93,9 +96,6 @@ public class CategoriesListActivity extends ListActivity {
 
     @Override
     public void onBackPressed() {
-        Log.d(CLASSNAME, "back press button");
-        Intent anIntent = new Intent(this,
-                DisplayCategoriesListActivity.class);
-        startActivity(anIntent);
+        NavUtils.navigateUpFromSameTask(this);
     }
 }

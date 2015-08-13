@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.blmsr.manager.dao.CategoryService;
 import com.blmsr.manager.models.Category;
 import com.blmsr.manager.service.DatabaseService;
+import com.blmsr.manager.util.Dialog;
 import com.blmsr.manager.util.StringUtils;
 
 import java.util.HashSet;
@@ -81,6 +83,11 @@ public class CategoryEditorActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     /**
@@ -167,7 +174,7 @@ public class CategoryEditorActivity extends Activity {
             {
                 aNumberOfRowsUpdated = aCategoryService.save(aCategory);
             }
-
+            itsCategoriesNames.add(aCategory.getCategoryName());
             aMessage += "Rows: "+ aNumberOfRowsUpdated;
             Log.d(CLASSNAME, aMessage);
             Toast.makeText(getApplicationContext(), aMessage, Toast.LENGTH_LONG).show();
@@ -190,6 +197,7 @@ public class CategoryEditorActivity extends Activity {
             }
 
             aCategoryService.delete(aCategory);
+            itsCategoriesNames.remove(aCategory.getCategoryName());
         }
 
         Toast.makeText(getApplicationContext(), "Category deleted successfully", Toast.LENGTH_LONG).show();
@@ -208,13 +216,12 @@ public class CategoryEditorActivity extends Activity {
             EditText anCategoryNameEditText = (EditText) findViewById(R.id.categoryNameEditText);
             String aCategoryName = anCategoryNameEditText.getText().toString();
 
-            // TODO should do with alert dialog.
             if (StringUtils.isNullOrEmpty(aCategoryName)) {
-                Toast.makeText(getApplicationContext(), "Category name can't empty", Toast.LENGTH_LONG).show();
+                Dialog.showValidationMessageDialog(this, "Category name can't empty");
                 return null;
             }
             if (itsCategoriesNames.contains(aCategoryName)) {
-                Toast.makeText(getApplicationContext(), "Category name already exist", Toast.LENGTH_LONG).show();
+                Dialog.showValidationMessageDialog(this, "Category name already exist");
                 return null;
             }
 
@@ -229,9 +236,9 @@ public class CategoryEditorActivity extends Activity {
                         if (anTableRow != null) {
                             EditText anEditText = (EditText) anTableRow.getChildAt(0);
                             if (anEditText == null || StringUtils.isNullOrEmpty(anEditText.getText().toString())) {
+
                                 // show a validation message.
-                                // TODO should a proper validation message.
-                                Toast.makeText(getApplicationContext(), "Field name can't empty", Toast.LENGTH_LONG).show();
+                                Dialog.showValidationMessageDialog(this, "Field name can't empty");
                                 return null;
                             }
 
@@ -244,11 +251,7 @@ public class CategoryEditorActivity extends Activity {
             // Validate the fields.
             if (StringUtils.isNullOrEmpty(itsCategory.getField1())) {
                 itsCategory = null;
-
-                // TODO should a proper validation message.
-                Toast.makeText(getApplicationContext(), "Atleast one Field should be created", Toast.LENGTH_LONG).show();
-            } else {
-                itsCategoriesNames.add(aCategoryName);
+                Dialog.showValidationMessageDialog(this, "At least one Field should be created");
             }
 
         } catch (Exception anException) {

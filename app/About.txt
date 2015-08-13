@@ -1,3 +1,12 @@
+1.65 (13-08-15)
+- Create the Dialog class.
+- Shown the validation messages.
+- Changed the icon for the categories entries.
+- Removed the to-do's from the code.
+- Removed the Toast.messsage's for the validations.
+- Removed the menu for the Categories list view.
+- Renamed the "tweet_list.xml" to "categoreis_list.xml"
+
 1.64 (12-08-15)
 - Fixed the list size issue.
 - Changed the icon for the categories.

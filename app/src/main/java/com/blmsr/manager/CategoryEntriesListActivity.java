@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,7 +68,7 @@ public class CategoryEntriesListActivity extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.tweet_list, menu);
+        getMenuInflater().inflate(R.menu.categories_list, menu);
         return true;
 
     }
@@ -103,4 +104,8 @@ public class CategoryEntriesListActivity extends ListActivity {
         return  aCategoryList;
     }
 
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+    }
 }

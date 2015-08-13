@@ -2,8 +2,11 @@ package com.blmsr.manager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +22,7 @@ import com.blmsr.manager.dao.CategoryEntryService;
 import com.blmsr.manager.models.CategoryEntry;
 import com.blmsr.manager.models.Category;
 import com.blmsr.manager.service.DatabaseService;
+import com.blmsr.manager.util.Dialog;
 import com.blmsr.manager.util.StringUtils;
 
 
@@ -42,8 +46,8 @@ public class CategoryEntriesEditorActivity extends Activity {
         setContentView(R.layout.activity_category_entries_editor);
         itsRootRelativeLayout = (LinearLayout) getWindow().getDecorView().findViewById(R.id.rootLinearLayout);
         Intent anIntent = getIntent();
-         {
-             itsCategoryEntry = (CategoryEntry) anIntent.getSerializableExtra(CATEGORY_ENTRY);
+        {
+            itsCategoryEntry = (CategoryEntry) anIntent.getSerializableExtra(CATEGORY_ENTRY);
             itsParentCategory = (Category) anIntent.getSerializableExtra(CategoryEditorActivity.CATEGORY);
 
             if (itsParentCategory == null) {
@@ -91,6 +95,60 @@ public class CategoryEntriesEditorActivity extends Activity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (validateErrorsOnBackPressed()) {
+            new AlertDialog.Builder(this)
+                    .setTitle(Dialog.CONFIRM_MESSAGE_TITLE)
+                    .setMessage("Are you want to save entry?")
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            NavUtils.navigateUpFromSameTask(CategoryEntriesEditorActivity.this);
+                        }
+                    })
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            saveCategoryEntry();
+                        }
+                    }).create().show();
+
+        } else {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+    }
+
+    private boolean validateErrorsOnBackPressed() {
+        boolean isDialogDirty = false;
+        try {
+
+            EditText aField1Value = (EditText) findViewById(R.id.field1Value);
+            String aCategoryEntryName = aField1Value.getText().toString();
+
+            if (StringUtils.isNotNull(aCategoryEntryName)) {
+                isDialogDirty = true;
+                return isDialogDirty;
+            }
+
+
+            for (int i = 0; i < itsRootRelativeLayout.getChildCount(); i++) {
+                View aLinearLayoutView = itsRootRelativeLayout.getChildAt(i);
+                if (aLinearLayoutView instanceof LinearLayout) {
+                    LinearLayout aLinearLayout = (LinearLayout) aLinearLayoutView;
+                    EditText anEditText = (EditText) aLinearLayout.getChildAt(1);
+                    if (StringUtils.isNotNull(anEditText.getText().toString())) {
+                        isDialogDirty = true;
+                        return isDialogDirty;
+                    }
+                }
+            }
+
+        } catch (Exception anException) {
+            Log.d(CLASSNAME, "validation error" + anException);
+        }
+        return isDialogDirty;
+    }
+
     /**
      * Save the values to db.
      */
@@ -100,16 +158,13 @@ public class CategoryEntriesEditorActivity extends Activity {
         if (aCategoryModel != null) {
             String aMessage = "Category entry saved successfully";
             long aNumberOfRowsUpdated = 0;
-            if(isUpdateRequest)
-            {
+            if (isUpdateRequest) {
                 aNumberOfRowsUpdated = aCategoryEntryService.update(aCategoryModel);
                 aMessage = "Category entry updated successfully";
-            }
-            else
-            {
+            } else {
                 aNumberOfRowsUpdated = aCategoryEntryService.save(aCategoryModel);
             }
-            aMessage += "Rows: "+ aNumberOfRowsUpdated;
+            aMessage += "Rows: " + aNumberOfRowsUpdated;
             Log.d(CLASSNAME, aMessage);
             Toast.makeText(getApplicationContext(), aMessage, Toast.LENGTH_LONG).show();
             Intent anIntent = new Intent(this, CategoryEntriesListActivity.class);
@@ -129,9 +184,8 @@ public class CategoryEntriesEditorActivity extends Activity {
             EditText aField1Value = (EditText) findViewById(R.id.field1Value);
             String aCategoryEntryName = aField1Value.getText().toString();
 
-            // TODO should do with alert dialog.
             if (StringUtils.isNullOrEmpty(aCategoryEntryName)) {
-                Toast.makeText(getApplicationContext(), "Category name can't empty", Toast.LENGTH_LONG).show();
+                Dialog.showValidationMessageDialog(this, "Category name can't empty");
                 return null;
             }
             itsCategoryEntry.setCategoryName(aCategoryEntryName);
@@ -141,14 +195,13 @@ public class CategoryEntriesEditorActivity extends Activity {
                 if (aLinearLayoutView instanceof LinearLayout) {
                     LinearLayout aLinearLayout = (LinearLayout) aLinearLayoutView;
                     EditText anEditText = (EditText) aLinearLayout.getChildAt(1);
-                    setValuesToModel(itsCategoryEntry, i+1, anEditText.getText().toString());
+                    setValuesToModel(itsCategoryEntry, i + 1, anEditText.getText().toString());
                 }
             }
 
             // Validate the fields.
             if (StringUtils.isNullOrEmpty(itsCategoryEntry.getField1())) {
-                // TODO should a proper validation message.
-                Toast.makeText(getApplicationContext(), "Atleast one Field should be created", Toast.LENGTH_LONG).show();
+                Dialog.showValidationMessageDialog(this, "At least one Field should be created");
                 return null;
             }
         } catch (Exception anException) {
@@ -160,58 +213,57 @@ public class CategoryEntriesEditorActivity extends Activity {
 
     /**
      * Sets the value to model.
+     *
      * @param theModel
      * @param theFieldIndexNumber
      * @param theFieldValue
      */
-    private void setValuesToModel(CategoryEntry theModel, int theFieldIndexNumber, String theFieldValue)
-    {
-        switch (theFieldIndexNumber)
-        {
-            case 1 :
+    private void setValuesToModel(CategoryEntry theModel, int theFieldIndexNumber, String theFieldValue) {
+        switch (theFieldIndexNumber) {
+            case 1:
                 theModel.setCategoryName(theFieldValue);
                 theModel.setField1(theFieldValue);
                 break;
-            case 2 :
+            case 2:
                 theModel.setField2(theFieldValue);
                 break;
-            case 3 :
+            case 3:
                 theModel.setField3(theFieldValue);
                 break;
-            case 4 :
+            case 4:
                 theModel.setField4(theFieldValue);
                 break;
-            case 5 :
+            case 5:
                 theModel.setField5(theFieldValue);
                 break;
-            case 6 :
+            case 6:
                 theModel.setField6(theFieldValue);
                 break;
-            case 7 :
+            case 7:
                 theModel.setField7(theFieldValue);
                 break;
-            case 8 :
+            case 8:
                 theModel.setField8(theFieldValue);
                 break;
-            case 9 :
+            case 9:
                 theModel.setField9(theFieldValue);
                 break;
-            case 10 :
+            case 10:
                 theModel.setField10(theFieldValue);
                 break;
-            case 11 :
+            case 11:
                 theModel.setField11(theFieldValue);
                 break;
-            case 12 :
+            case 12:
                 theModel.setField12(theFieldValue);
                 break;
-            case 13 :
+            case 13:
                 theModel.setField13(theFieldValue);
                 break;
-            case 14 :
+            case 14:
                 theModel.setField14(theFieldValue);
                 break;
-            case 15 :
+            case 15:
                 theModel.setField15(theFieldValue);
                 break;
         }
@@ -336,7 +388,7 @@ public class CategoryEntriesEditorActivity extends Activity {
             fieldCount++;
             Log.d(CLASSNAME, "filed count is: " + fieldCount);
         } else {
-            Toast.makeText(getApplicationContext(), "Only 15 fields can be created", Toast.LENGTH_LONG).show();
+            Dialog.showValidationMessageDialog(this, "Only 15 fields can be created");
         }
     }
 }
