@@ -1,27 +1,22 @@
 package com.blmsr.manager;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.blmsr.manager.dao.UserService;
 import com.blmsr.manager.models.User;
 import com.blmsr.manager.service.DatabaseService;
 import com.blmsr.manager.util.StringUtils;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Toast;
-
-public class ChangePasswordActivity extends Activity {
+public class ChangePasswordActivity extends Activity implements CategoryConstants {
     private static final String LOG_NAME = "ChangePasswordActivity";
-    public static final String CURRENT_PASSWORD_VISIBILITY = "CURRENT_PASSWORD_VISIBILITY";
     private boolean isCurrentPasswordAvailable = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

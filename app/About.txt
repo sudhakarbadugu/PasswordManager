@@ -1,9 +1,13 @@
+1.66 (19-08-15)
+- Fixed the back button handling the for the categories entries page.
+- Added new interface to hold the project constants.
+
 1.65 (13-08-15)
 - Create the Dialog class.
 - Shown the validation messages.
 - Changed the icon for the categories entries.
 - Removed the to-do's from the code.
-- Removed the Toast.messsage's for the validations.
+- Removed the Toast messsage's for the validations.
 - Removed the menu for the Categories list view.
 - Renamed the "tweet_list.xml" to "categoreis_list.xml"
 

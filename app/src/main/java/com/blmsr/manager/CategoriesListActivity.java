@@ -1,8 +1,6 @@
 package com.blmsr.manager;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -20,7 +18,7 @@ import com.blmsr.manager.service.DatabaseService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesListActivity extends ListActivity {
+public class CategoriesListActivity extends ListActivity implements CategoryConstants {
     private static final String CLASSNAME = "CategoriesListActivity";
     protected List<Category> itsCategoriesList = new ArrayList<Category>();
     private ArrayAdapter itsCategoriesListAdapter;
@@ -55,9 +53,8 @@ public class CategoriesListActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
         Intent anIntent = new Intent(this, CategoryEditorActivity.class);
-
-        anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
-        anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsCategoriesList.get(position));
+        anIntent.putExtra(EDIT_CATEGORY, EDIT_CATEGORY);
+        anIntent.putExtra(CATEGORY, itsCategoriesList.get(position));
         startActivity(anIntent);
     }
 

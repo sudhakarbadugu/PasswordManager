@@ -1,8 +1,5 @@
 package com.blmsr.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.blmsr.manager.dao.CategoryEntryService;
-import com.blmsr.manager.models.CategoryEntry;
 import com.blmsr.manager.models.Category;
+import com.blmsr.manager.models.CategoryEntry;
 import com.blmsr.manager.service.DatabaseService;
 
-public class CategoryEntriesListActivity extends ListActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CategoryEntriesListActivity extends ListActivity implements CategoryConstants {
     private static final String CLASSNAME = "CategoryEntriesListActivity";
     protected List<CategoryEntry> itsCategoriesList = new ArrayList<CategoryEntry>();
     private ArrayAdapter itsCategoriesListAdapter;
@@ -30,7 +30,6 @@ public class CategoryEntriesListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         try {
-
             // Handle the edit category.
             Intent anIntent = getIntent();
             if(CategoryEditorActivity.EDIT_CATEGORY.equals(anIntent.getStringExtra(CategoryEditorActivity.EDIT_CATEGORY)))
@@ -62,6 +61,7 @@ public class CategoryEntriesListActivity extends ListActivity {
         anIntent.putExtra(CategoryEntriesEditorActivity.EDIT_CATEGORY_ENTRY, CategoryEntriesEditorActivity.EDIT_CATEGORY_ENTRY);
         anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentModel);
         anIntent.putExtra(CategoryEntriesEditorActivity.CATEGORY_ENTRY, itsCategoriesList.get(position));
+        startActivityForResult(anIntent, 1);
         startActivity(anIntent);
     }
 
@@ -70,7 +70,6 @@ public class CategoryEntriesListActivity extends ListActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.categories_list, menu);
         return true;
-
     }
 
 
@@ -107,5 +106,18 @@ public class CategoryEntriesListActivity extends ListActivity {
     @Override
     public void onBackPressed() {
         NavUtils.navigateUpFromSameTask(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RESULT_ID == requestCode) {
+            if (resultCode == RESULT_OK) {
+                itsParentModel = (Category) data.getSerializableExtra(CATEGORY_DATA);
+                ArrayList<CategoryEntry> aSerializableExtra = fetchAllCategoryEntriesList(itsParentModel.getCategoryId());
+                itsCategoriesList.addAll(aSerializableExtra);
+                Log.d(CLASSNAME, "onActivityResult." + itsParentModel);
+            }
+        }
     }
 }

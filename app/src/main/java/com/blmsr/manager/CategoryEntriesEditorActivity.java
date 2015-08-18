@@ -6,31 +6,26 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blmsr.manager.dao.CategoryEntryService;
-import com.blmsr.manager.models.CategoryEntry;
 import com.blmsr.manager.models.Category;
+import com.blmsr.manager.models.CategoryEntry;
 import com.blmsr.manager.service.DatabaseService;
 import com.blmsr.manager.util.Dialog;
 import com.blmsr.manager.util.StringUtils;
 
 
-public class CategoryEntriesEditorActivity extends Activity {
+public class CategoryEntriesEditorActivity extends Activity implements CategoryConstants {
     private static final String CLASSNAME = "CategoryEntriesEditorActivity";
-    private static final String LOGGER_NAME = "CategoryEntriesEditorActivity";
-    public static final String CATEGORY_ENTRY = "CATEGORY_ENTRY";
-    public static final String EDIT_CATEGORY_ENTRY = "EDIT_CATEGORY_ENTRY";
     TextView itsField1Name;
     EditText itsField1Value;
     private int fieldCount = 0;
@@ -90,6 +85,9 @@ public class CategoryEntriesEditorActivity extends Activity {
                 return true;
             case R.id.action_settings:
                 return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -104,7 +102,11 @@ public class CategoryEntriesEditorActivity extends Activity {
                     .setMessage("Are you want to save entry?")
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
-                            NavUtils.navigateUpFromSameTask(CategoryEntriesEditorActivity.this);
+                            Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntriesListActivity.class);
+                            anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
+                            anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
+                            startActivity(anIntent);
+                            finish();
                         }
                     })
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -114,8 +116,12 @@ public class CategoryEntriesEditorActivity extends Activity {
                     }).create().show();
 
         } else {
-            NavUtils.navigateUpFromSameTask(this);
+            Intent intent = new Intent();
+            intent.putExtra(CATEGORY_DATA, itsParentCategory);
+            setResult(RESULT_ID, intent);
+            finish();
         }
+
     }
 
     private boolean validateErrorsOnBackPressed() {
@@ -129,7 +135,6 @@ public class CategoryEntriesEditorActivity extends Activity {
                 isDialogDirty = true;
                 return isDialogDirty;
             }
-
 
             for (int i = 0; i < itsRootRelativeLayout.getChildCount(); i++) {
                 View aLinearLayoutView = itsRootRelativeLayout.getChildAt(i);

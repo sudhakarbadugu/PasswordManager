@@ -20,7 +20,7 @@ import com.blmsr.manager.models.User;
 import com.blmsr.manager.service.DatabaseService;
 import com.blmsr.manager.util.StringUtils;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CategoryConstants {
 	Button itsLoginButton;
     EditText itsPasswordField;
     CheckBox itsCbShowPwd;
@@ -83,8 +83,8 @@ public class MainActivity extends Activity {
         if (!isPasswordAvailable)
         {
             // No passwords has set for the user so invisible the current password field.
-            anIntent.putExtra(ChangePasswordActivity.CURRENT_PASSWORD_VISIBILITY,ChangePasswordActivity.CURRENT_PASSWORD_VISIBILITY);
-        }
+			anIntent.putExtra(CURRENT_PASSWORD_VISIBILITY, CURRENT_PASSWORD_VISIBILITY);
+		}
         startActivity(anIntent);
     }
 	public void performLogin(View v) {

@@ -26,9 +26,7 @@ import com.blmsr.manager.util.StringUtils;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CategoryEditorActivity extends Activity {
-    public static final String EDIT_CATEGORY = "EDIT_CATEGORY";
-    public static final String CATEGORY = "CATEGORY";
+public class CategoryEditorActivity extends Activity implements CategoryConstants {
     private final String CLASSNAME = "CategoryEditorActivity";
     private static Set<String> itsCategoriesNames = new HashSet<String>();
     private int fieldCount = 0;
