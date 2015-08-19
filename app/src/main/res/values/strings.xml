@@ -38,5 +38,7 @@
     <string name="title_activity_categories_list">Categories List</string>
     <string name="title_activity_display_categories_list">Categories List</string>
     <string name="lbl_item_name">Field</string>
+    <string name="action_home">Home</string>
+    <string name="title_activity_category_entry_view">CategoryEntryViewActivity</string>
 
 </resources>

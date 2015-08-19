@@ -61,6 +61,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                 Log.e(CLASSNAME, "exception" + anException);
             }
 
+            setTitle(itsParentCategory.getCategoryName());
         }
     }
 
@@ -102,7 +103,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                     .setMessage("Are you want to save entry?")
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
-                            Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntriesListActivity.class);
+                            Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntryViewActivity.class);
                             anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
                             anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
                             startActivity(anIntent);
@@ -277,7 +278,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
     /**
      * performs the delete.
      */
-    private void deleteCategoryEntry() {
+    protected void deleteCategoryEntry() {
         CategoryEntryService aCategoryEntryService = DatabaseService.getInstance(this).getCategoryEntryService();
         Intent anIntent = getIntent();
         if (EDIT_CATEGORY_ENTRY.equals(anIntent.getStringExtra(EDIT_CATEGORY_ENTRY))) {
@@ -369,7 +370,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
         return aTextView;
     }
 
-    private EditText getEditorText(String theText) {
+    protected EditText getEditorText(String theText) {
         EditText aEditText = new EditText(this);
         aEditText.setText(theText);
         aEditText.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);

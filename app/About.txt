@@ -1,3 +1,8 @@
+1.67 (19-08-15)
+- Set the dynamic title for the categories entries.
+- Added the 'Home' option in the settings.
+- Implemented the action for home option for the settings.
+
 1.66 (19-08-15)
 - Fixed the back button handling the for the categories entries page.
 - Added new interface to hold the project constants.

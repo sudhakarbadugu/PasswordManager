@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blmsr.manager"
     android:versionCode="1"
-    android:versionName="1.66">
+    android:versionName="1.67">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -71,6 +71,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.blmsr.manager.CategoryHomeActivity" />
+        </activity>
+        <activity
+            android:name=".CategoryEntryViewActivity"
+            android:label="@string/title_activity_category_entry_view"
+            android:parentActivityName=".CategoryEntriesListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.blmsr.manager.CategoryEntriesListActivity" />
         </activity>
     </application>
 

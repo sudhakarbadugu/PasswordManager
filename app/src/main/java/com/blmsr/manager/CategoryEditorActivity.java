@@ -54,6 +54,8 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
             aCategoryNameField.setText(itsCategory.getCategoryName());
             createRequiredFields(itsCategory);
             Log.d(CLASSNAME, "successfully set the text to category name");
+
+            setTitle(itsCategory.getCategoryName() + " Category");
         }
     }
 

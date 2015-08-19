@@ -30,17 +30,22 @@ public class DisplayCategoriesListActivity extends CategoriesListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_home:
+                goToHome();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    //TODO should do the proper way of returning to parent task.
+    private void goToHome() {
+        Intent anIntent = new Intent(this, CategoryHomeActivity.class);
+        startActivity(anIntent);
+        finish();
     }
 
     @Override

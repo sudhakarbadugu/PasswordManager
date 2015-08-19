@@ -49,6 +49,7 @@ public class CategoryEntriesListActivity extends ListActivity implements Categor
             Log.e("CategoriesListActivity", "error while fetch the data");
         }
 
+        setTitle(itsParentModel.getCategoryName());
         itsCategoriesListAdapter = new CategoryEntriesListAdapter(this,itsCategoriesList.toArray(new CategoryEntry[] {}));
         setListAdapter(itsCategoriesListAdapter);
         setContentView(R.layout.activity_tweet_list);
@@ -57,11 +58,11 @@ public class CategoryEntriesListActivity extends ListActivity implements Categor
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
-        Intent anIntent = new Intent(this, CategoryEntriesEditorActivity.class);
-        anIntent.putExtra(CategoryEntriesEditorActivity.EDIT_CATEGORY_ENTRY, CategoryEntriesEditorActivity.EDIT_CATEGORY_ENTRY);
-        anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentModel);
-        anIntent.putExtra(CategoryEntriesEditorActivity.CATEGORY_ENTRY, itsCategoriesList.get(position));
-        startActivityForResult(anIntent, 1);
+        Intent anIntent = new Intent(this, CategoryEntryViewActivity.class);
+        anIntent.putExtra(EDIT_CATEGORY_ENTRY, EDIT_CATEGORY_ENTRY);
+        anIntent.putExtra(CATEGORY, itsParentModel);
+        anIntent.putExtra(CATEGORY_ENTRY, itsCategoriesList.get(position));
+        startActivityForResult(anIntent, RESULT_ID);
         startActivity(anIntent);
     }
 
@@ -81,9 +82,19 @@ public class CategoryEntriesListActivity extends ListActivity implements Categor
         switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
+            case R.id.action_home:
+                goToHome();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //TODO should do the proper way of returning to parent task.
+    private void goToHome() {
+        Intent anIntent = new Intent(this, CategoryHomeActivity.class);
+        startActivity(anIntent);
+        finish();
     }
 
     public void addCategory(View theView) {

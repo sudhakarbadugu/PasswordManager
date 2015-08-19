@@ -3,6 +3,12 @@
     tools:context="com.blmsr.manager.CategoriesListActivity">
 
     <item
+        android:id="@+id/action_home"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_home" />
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
