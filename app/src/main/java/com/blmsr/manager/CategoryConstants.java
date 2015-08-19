@@ -6,6 +6,7 @@ package com.blmsr.manager;
 public interface CategoryConstants {
     public static final String CATEGORY_ENTRY = "CATEGORY_ENTRY";
     public static final String EDIT_CATEGORY_ENTRY = "EDIT_CATEGORY_ENTRY";
+    public static final String EDIT_CATEGORY_ENTRY_VIEW_ONLY = "EDIT_CATEGORY_ENTRY_VIEW_ONLY";
     public static final int RESULT_ID = 100;
     public static final String CATEGORY_DATA = "CategoryData";
     public static final String EDIT_CATEGORY = "EDIT_CATEGORY";

@@ -28,7 +28,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
     private static final String CLASSNAME = "CategoryEntriesEditorActivity";
     TextView itsField1Name;
     EditText itsField1Value;
-    private int fieldCount = 0;
+    int fieldCount = 0;
     Category itsParentCategory;
     CategoryEntry itsCategoryEntry;
     private boolean isUpdateRequest = true;
@@ -106,6 +106,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                             Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntryViewActivity.class);
                             anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
                             anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
+                            anIntent.putExtra(CategoryEditorActivity.CATEGORY_ENTRY, itsCategoryEntry);
                             startActivity(anIntent);
                             finish();
                         }
@@ -164,18 +165,20 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
         if (aCategoryModel != null) {
             String aMessage = "Category entry saved successfully";
             long aNumberOfRowsUpdated = 0;
+            Intent anIntent = new Intent(this, CategoryEntriesListActivity.class);
             if (isUpdateRequest) {
                 aNumberOfRowsUpdated = aCategoryEntryService.update(aCategoryModel);
                 aMessage = "Category entry updated successfully";
+                anIntent = new Intent(this, CategoryEntryViewActivity.class);
             } else {
                 aNumberOfRowsUpdated = aCategoryEntryService.save(aCategoryModel);
             }
             aMessage += "Rows: " + aNumberOfRowsUpdated;
             Log.d(CLASSNAME, aMessage);
             Toast.makeText(getApplicationContext(), aMessage, Toast.LENGTH_LONG).show();
-            Intent anIntent = new Intent(this, CategoryEntriesListActivity.class);
-            anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
+            anIntent.putExtra(EDIT_CATEGORY, EDIT_CATEGORY);
             anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
+            anIntent.putExtra(CategoryEditorActivity.CATEGORY_ENTRY, itsCategoryEntry);
             startActivity(anIntent);
         }
     }
@@ -364,13 +367,14 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
 
     private TextView getTextView(String theText) {
         TextView aTextView = new TextView(this);
-        aTextView.setWidth(200);
+        aTextView.setWidth(300);
+        aTextView.setTextSize(20);
         aTextView.setText(theText);
 
         return aTextView;
     }
 
-    protected EditText getEditorText(String theText) {
+    protected View getEditorText(String theText) {
         EditText aEditText = new EditText(this);
         aEditText.setText(theText);
         aEditText.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
@@ -382,13 +386,14 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
 
     private LinearLayout getLayout(String theTextViewText, String theEditViewHint) {
         LinearLayout aLinearLayout = createLinearLayout();
+        aLinearLayout.setPadding(0, 10, 0, 2);
         aLinearLayout.addView(getTextView(theTextViewText));
         aLinearLayout.addView(getEditorText(theEditViewHint));
 
         return aLinearLayout;
     }
 
-    private void addField(String theTextViewText, String theEditViewText) {
+    protected void addField(String theTextViewText, String theEditViewText) {
         if (fieldCount < 15) {
             itsRootRelativeLayout.addView(getLayout(theTextViewText, theEditViewText), fieldCount);
             fieldCount++;
