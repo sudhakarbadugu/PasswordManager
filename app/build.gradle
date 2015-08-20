@@ -29,8 +29,6 @@ android {
         }
     }
     productFlavors {
-        flavor {
-        }
     }
 }
 

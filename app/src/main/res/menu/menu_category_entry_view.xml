@@ -5,7 +5,7 @@
     <!-- Edot, should appear as action button -->
     <item
         android:id="@+id/action_edit"
-        android:icon="@drawable/ic_action_edit_light"
+        android:icon="@drawable/ic_mode_edit_white_48dp"
         android:title="@string/lbl_save"
         android:showAsAction="ifRoom" />
 

@@ -103,12 +103,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                     .setMessage("Are you want to save entry?")
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
-                            Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntryViewActivity.class);
-                            anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
-                            anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
-                            anIntent.putExtra(CategoryEditorActivity.CATEGORY_ENTRY, itsCategoryEntry);
-                            startActivity(anIntent);
-                            finish();
+                            goToParentActivity();
                         }
                     })
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -118,32 +113,29 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                     }).create().show();
 
         } else {
-            Intent intent = new Intent();
-            intent.putExtra(CATEGORY_DATA, itsParentCategory);
-            setResult(RESULT_ID, intent);
-            finish();
+            goToParentActivity();
         }
-
     }
 
+    private void goToParentActivity() {
+        Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntryViewActivity.class);
+        anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
+        anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
+        anIntent.putExtra(CategoryEditorActivity.CATEGORY_ENTRY, itsCategoryEntry);
+        startActivity(anIntent);
+        super.finish();
+
+    }
     private boolean validateErrorsOnBackPressed() {
         boolean isDialogDirty = false;
         try {
-
-            EditText aField1Value = (EditText) findViewById(R.id.field1Value);
-            String aCategoryEntryName = aField1Value.getText().toString();
-
-            if (StringUtils.isNotNull(aCategoryEntryName)) {
-                isDialogDirty = true;
-                return isDialogDirty;
-            }
 
             for (int i = 0; i < itsRootRelativeLayout.getChildCount(); i++) {
                 View aLinearLayoutView = itsRootRelativeLayout.getChildAt(i);
                 if (aLinearLayoutView instanceof LinearLayout) {
                     LinearLayout aLinearLayout = (LinearLayout) aLinearLayoutView;
                     EditText anEditText = (EditText) aLinearLayout.getChildAt(1);
-                    if (StringUtils.isNotNull(anEditText.getText().toString())) {
+                    if (validateFieldChanges(i + 1, anEditText.getText().toString())) {
                         isDialogDirty = true;
                         return isDialogDirty;
                     }
@@ -275,6 +267,54 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
             case 15:
                 theModel.setField15(theFieldValue);
                 break;
+        }
+
+
+    }
+
+    /**
+     * Sets the value to model.
+     *
+     * @param theFieldIndexNumber
+     * @param theFieldValue
+     */
+    private boolean validateFieldChanges(int theFieldIndexNumber, String theFieldValue) {
+        if (itsCategoryEntry == null) {
+            return false;
+        }
+        switch (theFieldIndexNumber) {
+            case 1:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField1(), theFieldValue);
+            case 2:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField2(), theFieldValue);
+            case 3:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField3(), theFieldValue);
+            case 4:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField4(), theFieldValue);
+            case 5:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField5(), theFieldValue);
+            case 6:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField6(), theFieldValue);
+            case 7:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField7(), theFieldValue);
+            case 8:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField8(), theFieldValue);
+            case 9:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField9(), theFieldValue);
+            case 10:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField10(), theFieldValue);
+            case 11:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField11(), theFieldValue);
+            case 12:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField12(), theFieldValue);
+            case 13:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField13(), theFieldValue);
+            case 14:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField14(), theFieldValue);
+            case 15:
+                return StringUtils.areNotEqual(itsCategoryEntry.getField15(), theFieldValue);
+            default:
+                return false;
         }
     }
 

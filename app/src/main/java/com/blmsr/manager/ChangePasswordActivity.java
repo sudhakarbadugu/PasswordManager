@@ -77,7 +77,7 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
                 return;
             }
 
-            if (!StringUtils.areBothSame(anItemNameValue, anItemValue)) {
+            if (!StringUtils.areEqual(anItemNameValue, anItemValue)) {
                 aConfirmPasswordField.setError("Please enter correct confirm password");
                 return;
             }

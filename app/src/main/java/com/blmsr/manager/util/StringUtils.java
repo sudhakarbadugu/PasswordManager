@@ -26,8 +26,11 @@ public class StringUtils {
     }
 
 
+    public static boolean areNotEqual(String theValue1, String theValue2) {
+        return !areEqual(theValue1, theValue2);
+    }
 
-    public static boolean areBothSame(String theValue1, String theValue2)
+    public static boolean areEqual(String theValue1, String theValue2)
     {
         if(isNotNull(theValue1) && theValue1.equals(theValue2))
         {
@@ -35,6 +38,8 @@ public class StringUtils {
         }
         else if (isNotNull(theValue2) && theValue2.equals(theValue1))
         {
+            return true;
+        } else if (isNullOrEmpty(theValue1) && isNullOrEmpty(theValue2)) {
             return true;
         }
 
