@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/card_icon"
+        android:src="@drawable/ic_credit_card_black_24dp"
         android:contentDescription="test"/>
 
     <LinearLayout

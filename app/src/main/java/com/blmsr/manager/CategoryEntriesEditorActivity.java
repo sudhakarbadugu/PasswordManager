@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ActionMenuView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -118,14 +120,19 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
     }
 
     private void goToParentActivity() {
-        Intent anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryEntryViewActivity.class);
-        anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
-        anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentCategory);
-        anIntent.putExtra(CategoryEditorActivity.CATEGORY_ENTRY, itsCategoryEntry);
+        Intent anIntent = null;
+        if (isUpdateRequest) {
+            anIntent = new Intent(this, CategoryEntryViewActivity.class);
+        } else {
+            anIntent = new Intent(CategoryEntriesEditorActivity.this, CategoryHomeTabbedActivity.class);
+        }
+        anIntent.putExtra(EDIT_CATEGORY, EDIT_CATEGORY);
+        anIntent.putExtra(CATEGORY, itsParentCategory);
+        anIntent.putExtra(CATEGORY_ENTRY, itsCategoryEntry);
         startActivity(anIntent);
         super.finish();
-
     }
+
     private boolean validateErrorsOnBackPressed() {
         boolean isDialogDirty = false;
         try {
@@ -157,7 +164,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
         if (aCategoryModel != null) {
             String aMessage = "Category entry saved successfully";
             long aNumberOfRowsUpdated = 0;
-            Intent anIntent = new Intent(this, CategoryEntriesListActivity.class);
+            Intent anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
             if (isUpdateRequest) {
                 aNumberOfRowsUpdated = aCategoryEntryService.update(aCategoryModel);
                 aMessage = "Category entry updated successfully";
@@ -268,8 +275,6 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                 theModel.setField15(theFieldValue);
                 break;
         }
-
-
     }
 
     /**
@@ -407,7 +412,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
 
     private TextView getTextView(String theText) {
         TextView aTextView = new TextView(this);
-        aTextView.setWidth(300);
+        aTextView.setWidth(260);
         aTextView.setTextSize(20);
         aTextView.setText(theText);
 
@@ -416,7 +421,9 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
 
     protected View getEditorText(String theText) {
         EditText aEditText = new EditText(this);
+        ViewGroup.LayoutParams aLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         aEditText.setText(theText);
+        aEditText.setLayoutParams(aLayoutParams);
         aEditText.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
         aEditText.setHint("Enter ");
         aEditText.setWidth(400);

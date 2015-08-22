@@ -107,7 +107,9 @@ public class MainActivity extends Activity implements CategoryConstants {
 			return;
 		}
 
-		Intent anIntent = new Intent(MainActivity.this, CategoryHomeActivity.class);
+		//Intent anIntent = new Intent(MainActivity.this, CategoryHomeActivity.class);
+		Intent anIntent = new Intent(MainActivity.this, CategoryHomeTabbedActivity.class);
+//		Intent anIntent = new Intent(MainActivity.this, com.blmsr.manager.test.MainActivity.class);
 		startActivity(anIntent);
 }
 }

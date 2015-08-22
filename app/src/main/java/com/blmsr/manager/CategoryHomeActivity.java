@@ -57,8 +57,7 @@ public class CategoryHomeActivity extends Activity {
         startActivity(anIntent);
     }
     public void openCategoryList(View theView) {
-        Intent anIntent = new Intent(this,
-                CategoriesListActivity.class);
+        Intent anIntent = new Intent(this, CategoriesListActivity.class);
         startActivity(anIntent);
     }
 

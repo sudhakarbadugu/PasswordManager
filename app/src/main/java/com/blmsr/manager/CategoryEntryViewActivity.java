@@ -103,26 +103,11 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
 
     public void editCategoryEntry(View theView) {
         Intent anIntent = new Intent(this, CategoryEntriesEditorActivity.class);
-        anIntent.putExtra(CategoryEntriesEditorActivity.EDIT_CATEGORY_ENTRY, CategoryEntriesEditorActivity.EDIT_CATEGORY_ENTRY);
-        anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentModel);
-        anIntent.putExtra(CategoryEntriesEditorActivity.CATEGORY_ENTRY, itsCategoryEntry);
-        startActivityForResult(anIntent, RESULT_ID);
+        anIntent.putExtra(EDIT_CATEGORY_ENTRY, EDIT_CATEGORY_ENTRY);
+        anIntent.putExtra(CATEGORY, itsParentModel);
+        anIntent.putExtra(CATEGORY_ENTRY, itsCategoryEntry);
         startActivity(anIntent);
     }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (RESULT_ID == requestCode) {
-            if (resultCode == RESULT_OK) {
-                itsParentModel = (Category) data.getSerializableExtra(CATEGORY_DATA);
-                itsCategoryEntry = (CategoryEntry) data.getSerializableExtra(CATEGORY_ENTRY);
-                Log.d("test", "onactivity result");
-            }
-        }
-    }
-
 
     /**
      * performs the delete.

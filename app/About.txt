@@ -1,3 +1,8 @@
+1.70 (22-08-15)
+- Added the tabbed menu for welcome page.
+- Fixed the minor bugs related to those.
+- Aligned the edit text pages.
+
 1.67 (19-08-15)
 - Set the dynamic title for the categories entries.
 - Added the 'Home' option in the settings.

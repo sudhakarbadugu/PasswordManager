@@ -40,5 +40,6 @@
     <string name="lbl_item_name">Field</string>
     <string name="action_home">Home</string>
     <string name="title_activity_category_entry_view">CategoryEntryViewActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

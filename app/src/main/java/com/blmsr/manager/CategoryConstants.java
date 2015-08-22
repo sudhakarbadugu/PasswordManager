@@ -12,4 +12,8 @@ public interface CategoryConstants {
     public static final String EDIT_CATEGORY = "EDIT_CATEGORY";
     public static final String CATEGORY = "CATEGORY";
     public static final String CURRENT_PASSWORD_VISIBILITY = "CURRENT_PASSWORD_VISIBILITY";
+
+    String CATEGORIES = "Categories";
+    String CATEGORY_EDITOR = "Category Editor";
+    String TAB_TYPE = "tab";
 }

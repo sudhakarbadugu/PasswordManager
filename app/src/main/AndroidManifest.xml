@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blmsr.manager"
     android:versionCode="1"
-    android:versionName="1.68">
+    android:versionName="1.70">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -33,7 +33,7 @@
         <activity
             android:name=".CategoryEntriesListActivity"
             android:label="@string/title_cards"
-            android:parentActivityName=".DisplayCategoriesListActivity">
+            android:parentActivityName=".CategoryHomeTabbedActivity">
         </activity>
         <activity
             android:name=".ChangePasswordActivity"
@@ -54,7 +54,7 @@
         <activity
             android:name=".CategoryEditorActivity"
             android:label="@string/title_activity_category_editor"
-            android:parentActivityName=".CategoriesListActivity" >
+            android:parentActivityName=".CategoryHomeTabbedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CategoriesListActivity" />
@@ -62,15 +62,15 @@
         <activity
             android:name=".CategoriesListActivity"
             android:label="@string/title_activity_categories_list"
-            android:parentActivityName=".CategoryHomeActivity" >
+            android:parentActivityName=".CategoryHomeTabbedActivity">
         </activity>
         <activity
             android:name=".DisplayCategoriesListActivity"
             android:label="@string/title_activity_display_categories_list"
-            android:parentActivityName=".CategoryHomeActivity" >
+            android:parentActivityName=".CategoryHomeTabbedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.blmsr.manager.CategoryHomeActivity" />
+                android:value="com.blmsr.manager.CategoryHomeTabbedActivity" />
         </activity>
         <activity
             android:name=".CategoryEntryViewActivity"
@@ -79,6 +79,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.blmsr.manager.CategoryEntriesListActivity" />
+        </activity>
+        <activity
+            android:name=".CategoryHomeTabbedActivity"
+            android:label="@string/title_activity_test">
+
         </activity>
     </application>
 

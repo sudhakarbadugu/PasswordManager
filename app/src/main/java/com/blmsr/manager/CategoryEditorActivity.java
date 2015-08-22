@@ -178,7 +178,7 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
             aMessage += "Rows: "+ aNumberOfRowsUpdated;
             Log.d(CLASSNAME, aMessage);
             Toast.makeText(getApplicationContext(), aMessage, Toast.LENGTH_LONG).show();
-            Intent anIntent = new Intent(this, CategoriesListActivity.class);
+            Intent anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
             startActivity(anIntent);
         }
     }
@@ -201,7 +201,7 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
         }
 
         Toast.makeText(getApplicationContext(), "Category deleted successfully", Toast.LENGTH_LONG).show();
-        anIntent = new Intent(this, CategoriesListActivity.class);
+        anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
         startActivity(anIntent);
     }
 
