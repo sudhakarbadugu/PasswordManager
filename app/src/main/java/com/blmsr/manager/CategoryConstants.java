@@ -16,4 +16,6 @@ public interface CategoryConstants {
     String CATEGORIES = "Categories";
     String CATEGORY_EDITOR = "Category Editor";
     String TAB_TYPE = "tab";
+
+    String SEPARATOR = "@#@#";
 }

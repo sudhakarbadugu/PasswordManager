@@ -66,13 +66,20 @@
 
         <TextView
             android:id="@+id/categoryFieldHeading"
-            android:layout_width="300dp"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:hint="@string/lbl_category_field_heading"
             android:inputType="textAutoComplete" />
 
+        <ImageButton
+            android:id="@+id/isPassword"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_menu_view" />
+
         <TextView
             android:id="@+id/categoryIconHeading"
+            android:paddingLeft="15sp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/lbl_category_delete_heading"
@@ -103,8 +110,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-
                 </LinearLayout>
 
                 <ImageButton

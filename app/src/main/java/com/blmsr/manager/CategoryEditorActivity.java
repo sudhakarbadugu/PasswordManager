@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -122,16 +123,33 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
         tableRow.setPadding(0, 10, 0, 0);
 
         EditText editText = new EditText(this);
-        editText.setWidth(600);
+        editText.setWidth(480);
         editText.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
 
+        // Array contains the field name and its visibility.
+        String[] aFieldAndVisibilityArray = StringUtils.split(theFieldName);
+
         // Set the name to edit text.
-        if (!StringUtils.isNullOrEmpty(theFieldName)) {
-            editText.setText(theFieldName);
+        if (aFieldAndVisibilityArray.length != 0) {
+            editText.setText(aFieldAndVisibilityArray[0]);
         }
         editText.requestFocus();
-
         tableRow.addView(editText);
+
+
+        CheckBox aCheckBox = new CheckBox(this);
+        tableRow.addView(aCheckBox);
+
+        // Hide the check box for the 1st component.
+        if (fieldCount == 0) {
+            aCheckBox.setVisibility(View.INVISIBLE);
+        }
+
+        // Retain the selection from db values.
+        if (aFieldAndVisibilityArray.length == 2) {
+            aCheckBox.setChecked(Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
+        }
+
         ImageButton btnGreen = new ImageButton(this);
         btnGreen.setImageResource(R.drawable.ic_delete);
         btnGreen.setBackgroundColor(Color.TRANSPARENT);
@@ -165,17 +183,14 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
 
             String aMessage = "Category saved successfully";
             long aNumberOfRowsUpdated = 0;
-            if(isUpdateRequest)
-            {
+            if (isUpdateRequest) {
                 aNumberOfRowsUpdated = aCategoryService.update(aCategory);
                 aMessage = "Category updated successfully";
-            }
-            else
-            {
+            } else {
                 aNumberOfRowsUpdated = aCategoryService.save(aCategory);
             }
             itsCategoriesNames.add(aCategory.getCategoryName());
-            aMessage += "Rows: "+ aNumberOfRowsUpdated;
+            aMessage += "Rows: " + aNumberOfRowsUpdated;
             Log.d(CLASSNAME, aMessage);
             Toast.makeText(getApplicationContext(), aMessage, Toast.LENGTH_LONG).show();
             Intent anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
@@ -241,8 +256,9 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
                                 Dialog.showValidationMessageDialog(this, "Field name can't empty");
                                 return null;
                             }
-
-                            setValuesToModel(itsCategory, i, anEditText.getText().toString());
+                            CheckBox aCheckBox = (CheckBox) anTableRow.getChildAt(1);
+                            boolean isPasswordTypeField = aCheckBox != null ? aCheckBox.isChecked() : false;
+                            setValuesToModel(itsCategory, i, anEditText.getText().toString(), isPasswordTypeField);
                         }
                     }
                 }
@@ -267,8 +283,13 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
      * @param theModel
      * @param theFieldIndexNumber
      * @param theFieldValue
+     * @param isPassWordTypeField
      */
-    private void setValuesToModel(Category theModel, int theFieldIndexNumber, String theFieldValue) {
+    private void setValuesToModel(Category theModel, int theFieldIndexNumber, String theFieldValue, boolean isPassWordTypeField) {
+        if (StringUtils.isNotNull(theFieldValue)) {
+            theFieldValue += SEPARATOR + isPassWordTypeField;
+        }
+
         switch (theFieldIndexNumber) {
             case 1:
                 theModel.setField1(theFieldValue);

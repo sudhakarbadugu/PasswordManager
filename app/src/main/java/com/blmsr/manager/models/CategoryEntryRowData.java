@@ -8,10 +8,12 @@ import java.io.Serializable;
 public class CategoryEntryRowData implements Serializable {
     private String fieldName;
     private String fieldValue;
+    private boolean isPasswordTypeField;
 
-    public CategoryEntryRowData(String fieldName, String fieldValue) {
+    public CategoryEntryRowData(String fieldName, String fieldValue, boolean isPasswordTypeField) {
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
+        this.isPasswordTypeField = isPasswordTypeField;
     }
 
     public String getFieldName() {
@@ -20,5 +22,9 @@ public class CategoryEntryRowData implements Serializable {
 
     public String getFieldValue() {
         return fieldValue;
+    }
+
+    public boolean isPasswordTypeField() {
+        return isPasswordTypeField;
     }
 }

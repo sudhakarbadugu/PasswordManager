@@ -62,4 +62,17 @@
         android:textStyle="bold"
         android:onClick="performLogin"
         />
+
+    <Button
+        android:id="@+id/btn_setPassword"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_login"
+        android:text="@string/lbl_set_password"
+        android:layout_width="290dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:onClick="showChangePasswordDialog" />
 </RelativeLayout>

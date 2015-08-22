@@ -1,3 +1,8 @@
+1.71 (22-08-15)
+- Added the new feature to hide the password type fields.
+- Removed the Toast message when set the password
+- Added the 'Set Password' button to the main activity to set the password.
+
 1.70 (22-08-15)
 - Added the tabbed menu for welcome page.
 - Fixed the minor bugs related to those.

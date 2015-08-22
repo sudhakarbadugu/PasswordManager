@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
             itsRowData.addAll(convertToRowData(itsParentModel, itsCategoryEntry));
 
         } catch (Exception an) {
-            Log.e(CLASSNAME, "error while set the row data");
+            Log.e(CLASSNAME, "error while set the row data", an);
         }
 
         setTitle(itsParentModel.getCategoryName());
@@ -139,63 +140,78 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
         }
 
         if (!StringUtils.isNullOrEmpty(theCategory.getCategoryName())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getCategoryName(), theCategoryEntry.getField1());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField1());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField1(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField2())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField2(), theCategoryEntry.getField2());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField2());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField2(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField3())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField3(), theCategoryEntry.getField3());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField3());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField3(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField4())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField4(), theCategoryEntry.getField4());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField4());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField4(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField5())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField5(), theCategoryEntry.getField5());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField5());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField5(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField6())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField6(), theCategoryEntry.getField6());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField6());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField6(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField7())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField7(), theCategoryEntry.getField7());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField7());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField7(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField8())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField8(), theCategoryEntry.getField8());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField8());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField8(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField9())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField9(), theCategoryEntry.getField9());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField9());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField9(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField10())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField10(), theCategoryEntry.getField10());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField10());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField10(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField11())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField11(), theCategoryEntry.getField11());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField11());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField11(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField12())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField12(), theCategoryEntry.getField12());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField12());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField12(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField13())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField13(), theCategoryEntry.getField13());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField13());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField13(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField14())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField14(), theCategoryEntry.getField14());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField14());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField14(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
         if (!StringUtils.isNullOrEmpty(theCategory.getField15())) {
-            CategoryEntryRowData aRowData = new CategoryEntryRowData(theCategory.getField15(), theCategoryEntry.getField15());
+            String[] aFieldAndVisibilityArray = StringUtils.split(theCategory.getField15());
+            CategoryEntryRowData aRowData = new CategoryEntryRowData(aFieldAndVisibilityArray[0], theCategoryEntry.getField15(), Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
             anArrayList.add(aRowData);
         }
 

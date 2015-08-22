@@ -1,5 +1,7 @@
 package com.blmsr.manager.util;
 
+import com.blmsr.manager.CategoryConstants;
+
 /**
  * Created by LakshmiMadhav on 7/30/2015.
  */
@@ -44,5 +46,36 @@ public class StringUtils {
         }
 
         return false;
+    }
+
+    /**
+     * Split the given name based on the separator. If separator is unavailable, it returns given as element of String[].
+     *
+     * @param theName
+     * @return
+     */
+    public static String[] split(String theName) {
+        return split(theName, CategoryConstants.SEPARATOR);
+    }
+
+    /**
+     * Split the given name based on the separator. If separator is unavailable, it returns given as element of String[].
+     *
+     * @param theName
+     * @param theSeparator
+     * @return
+     */
+    public static String[] split(String theName, String theSeparator) {
+        if (isNullOrEmpty(theSeparator)) {
+            theSeparator = CategoryConstants.SEPARATOR;
+        }
+        String[] aFieldAndVisibilityArray = new String[1];
+        if (StringUtils.isNotNull(theName) && theName.contains(theSeparator)) {
+            aFieldAndVisibilityArray = theName.split(theSeparator);
+        } else {
+            aFieldAndVisibilityArray[0] = theName;
+        }
+
+        return aFieldAndVisibilityArray;
     }
 }

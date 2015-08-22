@@ -71,15 +71,15 @@ public class MainActivity extends Activity implements CategoryConstants {
 	public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_change_password) {
-            showChangePasswordDialog();
-            return true;
+			showChangePasswordDialog(null);
+			return true;
         }
 		return super.onOptionsItemSelected(item);
 	}
 
 
-    public void showChangePasswordDialog() {
-        Intent anIntent = new Intent(this, ChangePasswordActivity.class);
+	public void showChangePasswordDialog(View tView) {
+		Intent anIntent = new Intent(this, ChangePasswordActivity.class);
         if (!isPasswordAvailable)
         {
             // No passwords has set for the user so invisible the current password field.
@@ -91,7 +91,6 @@ public class MainActivity extends Activity implements CategoryConstants {
 
 		EditText aPwdField = (EditText) findViewById(R.id.fld_pwd);
 		String apwd = aPwdField.getText().toString();
-		Log.d("MainActivity", "PWD :" + apwd);
 
 		if (StringUtils.isNullOrEmpty(apwd)) {
             aPwdField.setError("Enter Password");
@@ -103,7 +102,6 @@ public class MainActivity extends Activity implements CategoryConstants {
         if (anUser == null)
         {
 			aPwdField.setError("Set the correct password");
-			Toast.makeText(getApplicationContext(), "Set the password first if not configured", Toast.LENGTH_LONG).show();
 			return;
 		}
 

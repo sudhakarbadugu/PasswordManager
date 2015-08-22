@@ -17,7 +17,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:paddingTop="3sp"
         android:paddingBottom="3sp"
@@ -31,5 +31,12 @@
             android:textSize="21sp" />
 
     </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/isPasswordTypeCheckbox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:button="@drawable/ic_menu_view" />
 
 </LinearLayout>
