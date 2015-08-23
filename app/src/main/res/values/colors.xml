@@ -4,4 +4,7 @@
     <color name="primary_pressed">#FF8800</color>
     <color name="ripple">#FF8800</color>
     <color name="blue">#00CCFF</color>
+    <color name="buttonColour">#00CCFF</color>
+    <color name="fontColour">#FFFFFF</color>
+
 </resources>

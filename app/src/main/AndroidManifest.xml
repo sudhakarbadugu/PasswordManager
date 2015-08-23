@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blmsr.manager"
     android:versionCode="1"
-    android:versionName="1.71">
+    android:versionName="1.72">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -48,10 +48,6 @@
                 android:value=".CategoryEntriesListActivity" />
         </activity>
         <activity
-            android:name=".CategoryHomeActivity"
-            android:label="@string/title_activity_category_home" >
-        </activity>
-        <activity
             android:name=".CategoryEditorActivity"
             android:label="@string/title_activity_category_editor"
             android:parentActivityName=".CategoryHomeTabbedActivity">
@@ -65,14 +61,6 @@
             android:parentActivityName=".CategoryHomeTabbedActivity">
         </activity>
         <activity
-            android:name=".DisplayCategoriesListActivity"
-            android:label="@string/title_activity_display_categories_list"
-            android:parentActivityName=".CategoryHomeTabbedActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.blmsr.manager.CategoryHomeTabbedActivity" />
-        </activity>
-        <activity
             android:name=".CategoryEntryViewActivity"
             android:label="@string/title_activity_category_entry_view"
             android:parentActivityName=".CategoryEntriesListActivity">
@@ -82,9 +70,7 @@
         </activity>
         <activity
             android:name=".CategoryHomeTabbedActivity"
-            android:label="@string/title_activity_test">
-
-        </activity>
+            android:label="@string/title_activity_test"></activity>
     </application>
 
 </manifest>

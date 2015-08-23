@@ -118,6 +118,7 @@
                     android:layout_height="50dp"
                     android:layout_below="@+id/addCategoryLayout"
                     android:src="@drawable/ic_input_add"
+                    android:background="@color/buttonColour"
                     android:onClick="addField"
                     />
             </LinearLayout>

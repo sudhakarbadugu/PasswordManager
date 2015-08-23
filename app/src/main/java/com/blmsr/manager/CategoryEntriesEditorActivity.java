@@ -170,6 +170,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
                 aMessage = "Category entry updated successfully";
                 anIntent = new Intent(this, CategoryEntryViewActivity.class);
             } else {
+                anIntent = new Intent(this, CategoryEntriesListActivity.class);
                 aNumberOfRowsUpdated = aCategoryEntryService.save(aCategoryModel);
             }
             aMessage += "Rows: " + aNumberOfRowsUpdated;
@@ -356,7 +357,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
         if (!StringUtils.isNullOrEmpty(theCategory.getCategoryName())) {
             itsField1Name = (TextView) findViewById(R.id.field1Name);
             itsField1Value = (EditText) findViewById(R.id.field1Value);
-            itsField1Name.setText(StringUtils.split(theCategory.getField1())[0]);
+            itsField1Name.setText(theCategory.getField1());
             itsField1Value.setText(theCategoryEntry.getCategoryName());
             fieldCount++;
         }
@@ -414,7 +415,7 @@ public class CategoryEntriesEditorActivity extends Activity implements CategoryC
         TextView aTextView = new TextView(this);
         aTextView.setWidth(260);
         aTextView.setTextSize(20);
-        aTextView.setText(StringUtils.split(theText)[0]);
+        aTextView.setText(theText);
 
         return aTextView;
     }

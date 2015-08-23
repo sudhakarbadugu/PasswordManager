@@ -6,6 +6,10 @@ import java.io.Serializable;
  * Created by LakshmiMadhav on 8/4/2015.
  */
 public class Category implements Serializable {
+
+    public Category() {
+        defaultFieldVisibilities = defaultTemplateVisibilities;
+    }
     public String getCategoryName() {
         return categoryName;
     }
@@ -168,5 +172,20 @@ public class Category implements Serializable {
     private String field13;
     private String field14;
     private String field15;
+
+    public boolean[] getDefaultFieldVisibilities() {
+        return defaultFieldVisibilities;
+    }
+
+    public void setDefaultFieldVisibilities(boolean[] thedefaultFieldVisibities) {
+        if (thedefaultFieldVisibities == null || thedefaultFieldVisibities.length != 15) {
+            this.defaultFieldVisibilities = defaultTemplateVisibilities;
+        } else {
+            this.defaultFieldVisibilities = thedefaultFieldVisibities;
+        }
+    }
+
+    private boolean[] defaultFieldVisibilities;
+    public static final boolean[] defaultTemplateVisibilities = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,};
 
 }

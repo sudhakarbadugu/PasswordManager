@@ -73,7 +73,7 @@ public class CategoriesListActivity extends ListActivity implements CategoryCons
 
     //TODO should do the proper way of returning to parent task.
     private void goToHome() {
-        Intent anIntent = new Intent(this, CategoryHomeActivity.class);
+        Intent anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
         startActivity(anIntent);
         finish();
     }

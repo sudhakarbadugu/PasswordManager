@@ -1,25 +1,26 @@
 package com.blmsr.manager;
 
 import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-
-import com.blmsr.manager.adapter.TabsPagerAdapter;
-
-import android.app.ActionBar.Tab;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blmsr.manager.adapter.TabsPagerAdapter;
+
+/**
+ * This TabbedActivity is responsible to show the Configure categories and its categories entries.
+ */
+// TODO should re write this class using the latest tab activity.
 public class CategoryHomeTabbedActivity extends FragmentActivity implements ActionBar.TabListener, CategoryConstants {
     private ViewPager viewPager;
-    private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
     private String[] tabs = {CATEGORIES, CATEGORY_EDITOR};
@@ -32,7 +33,7 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        TabsPagerAdapter mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
@@ -83,6 +84,9 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
             case R.id.action_about:
                 showAbout();
                 return true;
+            case R.id.action_lock:
+                lockApp();
+                return true;
             case R.id.action_change_password:
                 showChangePasswordDialog();
                 return true;
@@ -93,6 +97,11 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
         }
     }
 
+    private void lockApp() {
+        Intent anIntent = new Intent(this, MainActivity.class);
+        startActivity(anIntent);
+
+    }
     public void showChangePasswordDialog() {
         Intent anIntent = new Intent(this, ChangePasswordActivity.class);
         startActivity(anIntent);
@@ -102,8 +111,7 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
         // Inflate the about message contents
         View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
         TextView textView = (TextView) messageView.findViewById(R.id.about_credits);
-        int defaultColor = textView.getTextColors().getDefaultColor();
-        textView.setText("Password manager is created by Sudhakar.\n Version: 1.70");
+        textView.setText("Password manager is created by Sudhakar.\n Version: 1.72");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name);
         builder.setView(messageView);
@@ -130,5 +138,10 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
 
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
     }
 }

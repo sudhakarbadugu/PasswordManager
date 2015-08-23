@@ -26,6 +26,14 @@ public interface CategoryTableContract extends DatabaseConstants {
     public static final String COLUMN_NAME_FIELD_14 = "FIELD_14";
     public static final String COLUMN_NAME_FIELD_15 = "FIELD_15";
 
+        /**
+         * This column stores the all fields types. ex. if a column type is password type then for that column
+         * it stores true as the values.
+         * It will be as shown as below.
+         * {false,true,false,false,false,false,false,false,false,false,false,false,}
+         */
+        public static final String COLUMN_NAME_FIELD_TYPES = "FIELD_TYPES";
+
 
     String SQL_CREATE_CATEGORY_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -46,7 +54,8 @@ public interface CategoryTableContract extends DatabaseConstants {
                     COLUMN_NAME_FIELD_12 + TEXT_TYPE + COMMA_SEP +
                     COLUMN_NAME_FIELD_13 + TEXT_TYPE + COMMA_SEP +
                     COLUMN_NAME_FIELD_14 + TEXT_TYPE + COMMA_SEP +
-                    COLUMN_NAME_FIELD_15 + TEXT_TYPE +
+                    COLUMN_NAME_FIELD_15 + TEXT_TYPE + COMMA_SEP +
+                    COLUMN_NAME_FIELD_TYPES + TEXT_TYPE +
                     ")";
 
 
@@ -66,10 +75,11 @@ public interface CategoryTableContract extends DatabaseConstants {
             COLUMN_NAME_FIELD_12,
             COLUMN_NAME_FIELD_13,
             COLUMN_NAME_FIELD_14,
-            COLUMN_NAME_FIELD_15
+            COLUMN_NAME_FIELD_15,
+            COLUMN_NAME_FIELD_TYPES
     };
 
-    String SQL_INSERT_CARDS_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
+        String SQL_INSERT_CARDS_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
             .append("(")
             .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
             .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
@@ -79,8 +89,9 @@ public interface CategoryTableContract extends DatabaseConstants {
             .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_5).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_6).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_7).append(") VALUES (")
-            .append("'Cards'").append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_7).append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_TYPES).append(") VALUES (")
+                .append("'Cards'").append(COMMA_SEP)
             .append("'card_icon'").append(COMMA_SEP)
             .append("'Card name'").append(COMMA_SEP)
             .append("'Card Number'").append(COMMA_SEP)
@@ -88,59 +99,27 @@ public interface CategoryTableContract extends DatabaseConstants {
             .append("'Holder'").append(COMMA_SEP)
             .append("'Expiry'").append(COMMA_SEP)
             .append("'Security code'").append(COMMA_SEP)
-            .append("'CVV'").append(")").toString();
+            .append("'CVV'").append(COMMA_SEP)
+                .append("'{false,false,true,false,false,true,true,false,false,false,false,false,false,false,false}'").append(")").toString();
 
-    String SQL_INSERT_COMPUTERS_LOGIN_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
+        String SQL_INSERT_COMPUTERS_LOGIN_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
             .append("(")
             .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
             .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_1).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_2).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_4).append(") VALUES (")
-            .append("'Computer Logins'").append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_TYPES).append(") VALUES (")
+                .append("'Computer Logins'").append(COMMA_SEP)
             .append("'ic_category_computer_logins'").append(COMMA_SEP)
             .append("'Account'").append(COMMA_SEP)
             .append("'Name'").append(COMMA_SEP)
             .append("'Password'").append(COMMA_SEP)
-            .append("'Note'").append(")").toString();
+            .append("'Note'").append(COMMA_SEP)
+                .append("'{false,false,true,false,false,false,false,false,false,false,false,false,false,false,false}'").append(")").toString();
 
-    String SQL_INSERT_E_BANKING_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
-            .append("(")
-            .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
-            .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_1).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_2).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_5).append(") VALUES (")
-            .append("'e-Banking'").append(COMMA_SEP)
-            .append("'ic_bw_bank'").append(COMMA_SEP)
-            .append("'Bank'").append(COMMA_SEP)
-            .append("'Website'").append(COMMA_SEP)
-            .append("'Name'").append(COMMA_SEP)
-            .append("'Password'").append(COMMA_SEP)
-            .append("'Note'").append(")").toString();
-
-
-    String SQL_INSERT_EMAIL_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
-            .append("(")
-            .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
-            .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_1).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_2).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_5).append(") VALUES (")
-            .append("'Email Accounts'").append(COMMA_SEP)
-            .append("'ic_email_black'").append(COMMA_SEP)
-            .append("'Account'").append(COMMA_SEP)
-            .append("'Email'").append(COMMA_SEP)
-            .append("'Password'").append(COMMA_SEP)
-            .append("'Web site'").append(COMMA_SEP)
-            .append("'Note'").append(")").toString();
-
-    String SQL_INSERT_MOBILE_APPS_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
+        String SQL_INSERT_E_BANKING_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
             .append("(")
             .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
             .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
@@ -149,29 +128,72 @@ public interface CategoryTableContract extends DatabaseConstants {
             .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_5).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_6).append(") VALUES (")
-            .append("'Mobile apps'").append(COMMA_SEP)
-            .append("'ic_mobile_icon'").append(COMMA_SEP)
-            .append("'App name'").append(COMMA_SEP)
-            .append("'User name'").append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_TYPES).append(") VALUES (")
+                .append("'e-Banking'").append(COMMA_SEP)
+            .append("'ic_bw_bank'").append(COMMA_SEP)
+            .append("'Bank'").append(COMMA_SEP)
+            .append("'Website'").append(COMMA_SEP)
+            .append("'Name'").append(COMMA_SEP)
             .append("'Password'").append(COMMA_SEP)
-            .append("'Signed username'").append(COMMA_SEP)
-            .append("'Mobile number'").append(COMMA_SEP)
-            .append("'Notes'").append(")").toString();
+            .append("'Note'").append(COMMA_SEP)
+                .append("'{false,false,false,true,false,false,false,false,false,false,false,false,false,false,false}'").append(")").toString();
 
-    String SQL_INSERT_WEB_ACCOUNTS_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
+
+        String SQL_INSERT_EMAIL_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
             .append("(")
             .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
             .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_1).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_2).append(COMMA_SEP)
             .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
-            .append(COLUMN_NAME_FIELD_4).append(") VALUES (")
-            .append("'Web Accounts'").append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_5).append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_TYPES).append(") VALUES (")
+                .append("'Email Accounts'").append(COMMA_SEP)
+            .append("'ic_email_black'").append(COMMA_SEP)
+            .append("'Account'").append(COMMA_SEP)
+            .append("'Email'").append(COMMA_SEP)
+            .append("'Password'").append(COMMA_SEP)
+            .append("'Web site'").append(COMMA_SEP)
+            .append("'Note'").append(COMMA_SEP)
+                .append("'{false,false,true,false,false,false,false,false,false,false,false,false,false,false,false}'").append(")").toString();
+
+        String SQL_INSERT_MOBILE_APPS_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
+            .append("(")
+            .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
+            .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_1).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_2).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_5).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_6).append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_TYPES).append(") VALUES (")
+                .append("'Mobile apps'").append(COMMA_SEP)
+            .append("'ic_mobile_icon'").append(COMMA_SEP)
+            .append("'App name'").append(COMMA_SEP)
+            .append("'User name'").append(COMMA_SEP)
+            .append("'Password'").append(COMMA_SEP)
+            .append("'Signed username'").append(COMMA_SEP)
+            .append("'Mobile number'").append(COMMA_SEP)
+            .append("'Notes'").append(COMMA_SEP)
+                .append("'{false,false,true,false,false,false,false,false,false,false,false,false,false,false,false}'").append(")").toString();
+
+        String SQL_INSERT_WEB_ACCOUNTS_CATEGORY = new StringBuilder("INSERT INTO ").append(TABLE_NAME)
+            .append("(")
+            .append(COLUMN_NAME_CATEGORY_NAME).append(COMMA_SEP)
+            .append(COLUMN_NAME_CATEGORY_ICON_NAME).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_1).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_2).append(COMMA_SEP)
+            .append(COLUMN_NAME_FIELD_3).append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_4).append(COMMA_SEP)
+                .append(COLUMN_NAME_FIELD_TYPES).append(") VALUES (")
+                .append("'Web Accounts'").append(COMMA_SEP)
             .append("'ic_web_icon'").append(COMMA_SEP)
             .append("'Web site'").append(COMMA_SEP)
             .append("'User name'").append(COMMA_SEP)
             .append("'Password'").append(COMMA_SEP)
-            .append("'Mobile number'").append(")").toString();
+                .append("'Mobile number'").append(COMMA_SEP)
+                .append("'{false,false,true,false,false,false,false,false,false,false,false,false,false,false,false}'").append(")").toString();
 
 }

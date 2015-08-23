@@ -11,13 +11,6 @@
     android:background="@drawable/wooden_background_9">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/app_descrip"
-        android:textColor="?android:attr/textColorPrimaryInverse" />
-
-    <TextView
         android:id="@+id/about_credits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

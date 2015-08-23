@@ -1,18 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.blmsr.manager.CategoryHomeActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" android:showAsAction="never" />
+    tools:context="com.blmsr.manager.CategoryHomeTabbedActivity">
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings" />
+
+    <item
+        android:id="@+id/action_lock"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_lock" />
 
     <item
         android:id="@+id/action_change_password"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_change_password"/>
+        android:title="@string/action_change_password" />
 
     <item
         android:id="@+id/action_about"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_about"/>
+        android:title="@string/action_about" />
 </menu>

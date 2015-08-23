@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.blmsr.manager.dao.UserService;
 import com.blmsr.manager.models.User;
@@ -21,9 +18,7 @@ import com.blmsr.manager.service.DatabaseService;
 import com.blmsr.manager.util.StringUtils;
 
 public class MainActivity extends Activity implements CategoryConstants {
-	Button itsLoginButton;
-    EditText itsPasswordField;
-    CheckBox itsCbShowPwd;
+    private EditText itsPasswordField;
     private boolean isPasswordAvailable = true;
 
 	@Override
@@ -34,23 +29,10 @@ public class MainActivity extends Activity implements CategoryConstants {
         // get the password EditText
         itsPasswordField = (EditText) findViewById(R.id.fld_pwd);
         // get the show/hide password Checkbox
-        itsCbShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
+        CheckBox itsCbShowPwd = (CheckBox) findViewById(R.id.cbShowPwd);
 
         // add onCheckedListener on checkbox
-        // when user clicks on this checkbox, this is the handler.
-        itsCbShowPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// checkbox status is changed from uncheck to checked.
-				if (!isChecked) {
-					// show password
-					itsPasswordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
-				} else {
-					// hide password
-					itsPasswordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-				}
-			}
-		});
+        itsCbShowPwd.setOnCheckedChangeListener(itsOnCheckedChangeListener);
 
         // Check the password available or not.
         UserService anUserService = DatabaseService.getInstance(this).getUserService();
@@ -59,6 +41,21 @@ public class MainActivity extends Activity implements CategoryConstants {
             isPasswordAvailable = false;
         }
 	}
+
+    private CompoundButton.OnCheckedChangeListener itsOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+
+        // when user clicks on this checkbox, this is the handler.
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            // checkbox status is changed from uncheck to checked.
+            if (!isChecked) {
+                // show password
+                itsPasswordField.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            } else {
+                // hide password
+                itsPasswordField.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+        }
+    };
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,9 +102,13 @@ public class MainActivity extends Activity implements CategoryConstants {
 			return;
 		}
 
-		//Intent anIntent = new Intent(MainActivity.this, CategoryHomeActivity.class);
 		Intent anIntent = new Intent(MainActivity.this, CategoryHomeTabbedActivity.class);
-//		Intent anIntent = new Intent(MainActivity.this, com.blmsr.manager.test.MainActivity.class);
 		startActivity(anIntent);
-}
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.moveTaskToBack(true);
+    }
+
 }

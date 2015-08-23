@@ -1,5 +1,12 @@
+1.72 (22-08-15)
+- Added the new menu "Lock" for the settings.
+- Implemented the lock feature.
+- Removed the back ground for the password change dialog
+- Added the default color for the button in the app.
+- Removed the unused wall papers from app.
+
 1.71 (22-08-15)
-- Added the new feature to hide the password type fields.
+- Added the new feature to hide the password type fields in category editor.
 - Removed the Toast message when set the password
 - Added the 'Set Password' button to the main activity to set the password.
 

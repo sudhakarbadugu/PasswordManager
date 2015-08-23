@@ -47,7 +47,6 @@
         android:layout_alignLeft="@id/pwd_block"
         android:layout_below="@id/pwd_block"
         android:text="@string/show_pwd"
-
         />
     <Button
         android:id="@+id/btn_login"
@@ -60,6 +59,8 @@
         android:layout_marginTop="15dp"
         android:textSize="13sp"
         android:textStyle="bold"
+        android:textColor="@color/fontColour"
+        android:background="@color/buttonColour"
         android:onClick="performLogin"
         />
 
@@ -74,5 +75,7 @@
         android:layout_marginTop="15dp"
         android:textSize="13sp"
         android:textStyle="bold"
+        android:textColor="@color/fontColour"
+        android:background="@color/buttonColour"
         android:onClick="showChangePasswordDialog" />
 </RelativeLayout>

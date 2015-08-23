@@ -127,11 +127,9 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
         editText.setInputType(InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
 
         // Array contains the field name and its visibility.
-        String[] aFieldAndVisibilityArray = StringUtils.split(theFieldName);
-
         // Set the name to edit text.
-        if (aFieldAndVisibilityArray.length != 0) {
-            editText.setText(aFieldAndVisibilityArray[0]);
+        if (StringUtils.isNotNull(theFieldName)) {
+            editText.setText(theFieldName);
         }
         editText.requestFocus();
         tableRow.addView(editText);
@@ -145,10 +143,10 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
             aCheckBox.setVisibility(View.INVISIBLE);
         }
 
+        boolean isChecked = itsCategory != null ? itsCategory.getDefaultFieldVisibilities()[fieldCount] : false;
+
         // Retain the selection from db values.
-        if (aFieldAndVisibilityArray.length == 2) {
-            aCheckBox.setChecked(Boolean.parseBoolean(aFieldAndVisibilityArray[1]));
-        }
+        aCheckBox.setChecked(isChecked);
 
         ImageButton btnGreen = new ImageButton(this);
         btnGreen.setImageResource(R.drawable.ic_delete);
@@ -241,7 +239,7 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
             }
 
             itsCategory.setCategoryName(aCategoryName);
-
+            boolean[] aFieldsVisibility = itsCategory.getDefaultFieldVisibilities();
             for (int i = 0; i < itsLinearLayout.getChildCount(); i++) {
                 View aTableLayOutView = itsLinearLayout.getChildAt(i);
                 if (aTableLayOutView instanceof TableLayout) {
@@ -258,7 +256,8 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
                             }
                             CheckBox aCheckBox = (CheckBox) anTableRow.getChildAt(1);
                             boolean isPasswordTypeField = aCheckBox != null ? aCheckBox.isChecked() : false;
-                            setValuesToModel(itsCategory, i, anEditText.getText().toString(), isPasswordTypeField);
+
+                            setValuesToModel(itsCategory, i, anEditText.getText().toString(), isPasswordTypeField, aFieldsVisibility);
                         }
                     }
                 }
@@ -270,6 +269,9 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
                 Dialog.showValidationMessageDialog(this, "At least one Field should be created");
             }
 
+            //set the default visibilities to model
+            itsCategory.setDefaultFieldVisibilities(aFieldsVisibility);
+
         } catch (Exception anException) {
             Log.d(CLASSNAME, "Exception occurred" + anException);
         }
@@ -279,62 +281,73 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
 
     /**
      * Sets the value to model.
-     *
-     * @param theModel
+     *  @param theModel
      * @param theFieldIndexNumber
      * @param theFieldValue
-     * @param isPassWordTypeField
+     * @param isPasswordTypeField
+     * @param aFieldsVisibility
      */
-    private void setValuesToModel(Category theModel, int theFieldIndexNumber, String theFieldValue, boolean isPassWordTypeField) {
-        if (StringUtils.isNotNull(theFieldValue)) {
-            theFieldValue += SEPARATOR + isPassWordTypeField;
-        }
-
+    private void setValuesToModel(Category theModel, int theFieldIndexNumber, String theFieldValue, boolean isPasswordTypeField, boolean[] aFieldsVisibility) {
         switch (theFieldIndexNumber) {
             case 1:
                 theModel.setField1(theFieldValue);
+                aFieldsVisibility[0] = isPasswordTypeField;
                 break;
             case 2:
                 theModel.setField2(theFieldValue);
+                aFieldsVisibility[1] = isPasswordTypeField;
                 break;
             case 3:
                 theModel.setField3(theFieldValue);
+                aFieldsVisibility[2] = isPasswordTypeField;
                 break;
             case 4:
                 theModel.setField4(theFieldValue);
+                aFieldsVisibility[3] = isPasswordTypeField;
                 break;
             case 5:
                 theModel.setField5(theFieldValue);
+                aFieldsVisibility[4] = isPasswordTypeField;
                 break;
             case 6:
                 theModel.setField6(theFieldValue);
+                aFieldsVisibility[5] = isPasswordTypeField;
                 break;
             case 7:
                 theModel.setField7(theFieldValue);
+                aFieldsVisibility[6] = isPasswordTypeField;
                 break;
             case 8:
                 theModel.setField8(theFieldValue);
+                aFieldsVisibility[7] = isPasswordTypeField;
                 break;
             case 9:
                 theModel.setField9(theFieldValue);
+                aFieldsVisibility[8] = isPasswordTypeField;
                 break;
             case 10:
                 theModel.setField10(theFieldValue);
+                aFieldsVisibility[9] = isPasswordTypeField;
                 break;
             case 11:
                 theModel.setField11(theFieldValue);
+                aFieldsVisibility[10] = isPasswordTypeField;
                 break;
             case 12:
                 theModel.setField12(theFieldValue);
+                aFieldsVisibility[11] = isPasswordTypeField;
                 break;
             case 13:
                 theModel.setField13(theFieldValue);
+                aFieldsVisibility[12] = isPasswordTypeField;
                 break;
             case 14:
                 theModel.setField14(theFieldValue);
+                aFieldsVisibility[13] = isPasswordTypeField;
                 break;
             case 15:
                 theModel.setField15(theFieldValue);
+                aFieldsVisibility[14] = isPasswordTypeField;
                 break;
         }
     }
