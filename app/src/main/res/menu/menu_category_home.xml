@@ -3,6 +3,13 @@
     tools:context="com.blmsr.manager.CategoryHomeTabbedActivity">
 
     <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:showAsAction="always"
+        android:title="@string/action_search" />
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"

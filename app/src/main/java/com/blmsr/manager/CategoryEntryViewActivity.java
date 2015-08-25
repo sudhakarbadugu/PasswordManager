@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.blmsr.manager.dao.CategoryEntryService;
@@ -31,6 +32,11 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
     private ArrayAdapter itsCategoryViewListAdapter;
     private Category itsParentModel;
     private CategoryEntry itsCategoryEntry;
+
+    /**
+     * Share the content using content provider
+     */
+    private ShareActionProvider itsShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +69,34 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_category_entry_view, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+
+        // Fetch and store ShareActionProvider
+        itsShareActionProvider = (ShareActionProvider) item.getActionProvider();
+        createIntent();
         return true;
+    }
+
+    /**
+     * Call to update the share intent
+     */
+    private void setShareIntent(Intent shareIntent) {
+        if (itsShareActionProvider != null) {
+            itsShareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+
+    /**
+     * Create an Intent to share the data.
+     */
+    private void createIntent() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, getContentForSharing());
+        sendIntent.setType("text/plain");
+        setShareIntent(sendIntent);
     }
 
     @Override
@@ -78,7 +111,8 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
             case R.id.action_edit:
                 editCategoryEntry(null);
                 return true;
-            case R.id.action_settings:
+            case R.id.menu_item_share:
+                createIntent();
                 return true;
             case android.R.id.home:
                 onBackPressed();
@@ -126,6 +160,21 @@ public class CategoryEntryViewActivity extends ListActivity implements CategoryC
         anIntent.putExtra(CategoryEditorActivity.EDIT_CATEGORY, CategoryEditorActivity.EDIT_CATEGORY);
         anIntent.putExtra(CategoryEditorActivity.CATEGORY, itsParentModel);
         startActivity(anIntent);
+    }
+
+
+    /**
+     * Return the content for sharing.
+     *
+     * @return
+     */
+    private String getContentForSharing() {
+        StringBuilder aContent = new StringBuilder();
+
+        for (CategoryEntryRowData aData : itsRowData) {
+            aContent.append(aData.getFieldName()).append(": ").append(aData.getFieldValue()).append("\n");
+        }
+        return aContent.toString();
     }
 
     private ArrayList<CategoryEntryRowData> convertToRowData(Category theCategory, CategoryEntry theCategoryEntry) {

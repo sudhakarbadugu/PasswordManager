@@ -9,7 +9,8 @@
     <string name="action_change_password">Change password</string>
     <string name="action_set_password">Set password</string>
     <string name="lbl_set_password">SET PASSWORD</string>
-    <string name="action_search">Edit</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_search">Search</string>
     <string name="action_delete">Delete</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="lbl_enter_pwd">Enter your password</string>
@@ -42,6 +43,6 @@
     <string name="lbl_item_name">Field</string>
     <string name="action_home">Home</string>
     <string name="title_activity_category_entry_view">CategoryEntryViewActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

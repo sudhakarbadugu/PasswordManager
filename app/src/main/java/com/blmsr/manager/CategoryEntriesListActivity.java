@@ -1,6 +1,8 @@
 package com.blmsr.manager;
 
 import android.app.ListActivity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.blmsr.manager.dao.CategoryEntryService;
 import com.blmsr.manager.models.Category;
@@ -85,6 +88,9 @@ public class CategoryEntriesListActivity extends ListActivity implements Categor
             case R.id.action_home:
                 goToHome();
                 return true;
+            case R.id.action_search:
+                search();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -93,6 +99,13 @@ public class CategoryEntriesListActivity extends ListActivity implements Categor
     //TODO should do the proper way of returning to parent task.
     private void goToHome() {
         Intent anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
+        startActivity(anIntent);
+        finish();
+    }
+
+    //TODO should do the proper way of returning to parent task.
+    private void search() {
+        Intent anIntent = new Intent(this, SearchActivity.class);
         startActivity(anIntent);
         finish();
     }
