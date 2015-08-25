@@ -1,3 +1,6 @@
+1.74 (26-08-15)
+- Added info about the about dialog.
+
 1.73 (25-08-15)
 - Added the share button for view activity.
 - Can share the data to the others easily.

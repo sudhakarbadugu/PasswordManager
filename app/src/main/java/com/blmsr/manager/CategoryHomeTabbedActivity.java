@@ -122,7 +122,13 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
         // Inflate the about message contents
         View messageView = getLayoutInflater().inflate(R.layout.about, null, false);
         TextView textView = (TextView) messageView.findViewById(R.id.about_credits);
-        textView.setText("Password manager is created by Sudhakar.\n Version: 1.72");
+        textView.setText("My Password Manager is the best app for helping you remember " +
+                "your personal data" +
+                "This helps a user store and organize passwords." +
+                "Password managers usually store passwords encrypted, requiring the user to create a master password;" +
+                "a single, ideally very strong password which grants the user access to their entire password database. " +
+                "Password manager is created by Sudhakar.B \n Version: 1.73\n" +
+                "This was to keep your passwords in an encrypted vault");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name);
         builder.setView(messageView);
