@@ -124,7 +124,7 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
         TextView textView = (TextView) messageView.findViewById(R.id.about_credits);
         textView.setText("My Password Manager is the best app for helping you remember " +
                 "your personal data" +
-                "This helps a user store and organize passwords." +
+                "This helps a user store and organize passwords. " +
                 "Password managers usually store passwords encrypted, requiring the user to create a master password;" +
                 "a single, ideally very strong password which grants the user access to their entire password database. " +
                 "Password manager is created by Sudhakar.B \n Version: 1.73\n" +
