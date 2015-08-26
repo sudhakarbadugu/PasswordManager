@@ -97,23 +97,23 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
     private void saveDetails() {
 
         try {
-            String anItemNameValue = itsCurrentPasswordTextField.getText().toString();
             String aCurrentPasswordValue = itsCurrentPasswordTextField.getText().toString();
             if (isCurrentPasswordAvailable && StringUtils.isNullOrEmpty(aCurrentPasswordValue)) {
                 itsCurrentPasswordTextField.setError("Current Password is required");
                 return;
             }
-            if (StringUtils.isNullOrEmpty(anItemNameValue)) {
-                itsCurrentPasswordTextField.setError("Password is required");
+            String aNewPassword = itsNewPasswordTextField.getText().toString();
+            if (StringUtils.isNullOrEmpty(aNewPassword)) {
+                itsNewPasswordTextField.setError("Password is required");
                 return;
             }
-            String anItemValue = itsCurrentPasswordTextField.getText().toString();
-            if (StringUtils.isNullOrEmpty(anItemValue)) {
-                itsCurrentPasswordTextField.setError("Confirm the password");
+            String aConfirmPassword = itsConfirmPasswordTextField.getText().toString();
+            if (StringUtils.isNullOrEmpty(aConfirmPassword)) {
+                itsConfirmPasswordTextField.setError("Confirm the password");
                 return;
             }
 
-            if (!StringUtils.areEqual(anItemNameValue, anItemValue)) {
+            if (!StringUtils.areEqual(aNewPassword, aConfirmPassword)) {
                 itsConfirmPasswordTextField.setError("Please enter correct confirm password");
                 return;
             }
@@ -125,7 +125,7 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
             if (!isCurrentPasswordAvailable && !isUserAvailable) {
 
                 anUser = new User();
-                anUser.setPassword(anItemNameValue.trim());
+                anUser.setPassword(aConfirmPassword.trim());
                 anUserService.save(anUser);
             } else {
                 if (!isUserAvailable) {
@@ -134,7 +134,7 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
                 }
 
                 // update the password in the database.
-                anUser.setPassword(anItemNameValue.trim());
+                anUser.setPassword(aConfirmPassword.trim());
                 anUserService.update(anUser);
             }
             Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_LONG).show();
