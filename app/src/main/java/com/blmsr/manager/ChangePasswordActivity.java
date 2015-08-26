@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.blmsr.manager.dao.UserService;
 import com.blmsr.manager.models.User;
 import com.blmsr.manager.service.DatabaseService;
+import com.blmsr.manager.util.EncryptionUtil;
 import com.blmsr.manager.util.StringUtils;
 
 /**
@@ -119,22 +120,22 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
             }
 
             UserService anUserService = DatabaseService.getInstance(this).getUserService();
-            User anUser = anUserService.getPassword(aCurrentPasswordValue);
+            String aPassword = EncryptionUtil.generateStrongPasswordHash(aConfirmPassword);
+            User anUser = anUserService.getPassword(aPassword);
 
             boolean isUserAvailable = anUser == null ? false : true;
             if (!isCurrentPasswordAvailable && !isUserAvailable) {
-
                 anUser = new User();
-                anUser.setPassword(aConfirmPassword.trim());
+                anUser.setPassword(aPassword);
                 anUserService.save(anUser);
             } else {
                 if (!isUserAvailable) {
-                    itsCurrentPasswordTextField.setError("enter correct password");
+                    itsCurrentPasswordTextField.setError("Enter correct password");
                     return;
                 }
 
                 // update the password in the database.
-                anUser.setPassword(aConfirmPassword.trim());
+                anUser.setPassword(aConfirmPassword);
                 anUserService.update(anUser);
             }
             Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_LONG).show();
