@@ -20,6 +20,8 @@ import com.blmsr.manager.service.DatabaseService;
 import com.blmsr.manager.util.EncryptionUtil;
 import com.blmsr.manager.util.StringUtils;
 
+import java.util.List;
+
 /**
  * This activity is responsible to change the password.
  */
@@ -39,7 +41,9 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
         itsNewPasswordTextField = (EditText) findViewById(R.id.newPasswordField);
         itsConfirmPasswordTextField = (EditText) findViewById(R.id.confirmPasswordField);
 
-        if (CURRENT_PASSWORD_VISIBILITY.equals(anIntent.getStringExtra(CURRENT_PASSWORD_VISIBILITY))) {
+        // Check the password available or not.
+        UserService anUserService = DatabaseService.getInstance(this).getUserService();
+        if (anUserService.getAllPasswords().isEmpty()) {
             isCurrentPasswordAvailable = false;
             itsCurrentPasswordTextField.setVisibility(View.INVISIBLE);
         }
@@ -120,22 +124,27 @@ public class ChangePasswordActivity extends Activity implements CategoryConstant
             }
 
             UserService anUserService = DatabaseService.getInstance(this).getUserService();
-            String aPassword = EncryptionUtil.generateStrongPasswordHash(aConfirmPassword);
-            User anUser = anUserService.getPassword(aPassword);
+            List<User> aList = anUserService.getAllPasswords();
 
-            boolean isUserAvailable = anUser == null ? false : true;
-            if (!isCurrentPasswordAvailable && !isUserAvailable) {
-                anUser = new User();
-                anUser.setPassword(aPassword);
+            String aHashedPassword = EncryptionUtil.generateStrongPasswordHash(aConfirmPassword);
+            boolean isUserUnAvailable = aList.isEmpty();
+            if (isUserUnAvailable && !isCurrentPasswordAvailable) {
+                User anUser = new User();
+                anUser.setPassword(aHashedPassword);
                 anUserService.save(anUser);
             } else {
-                if (!isUserAvailable) {
+                if (isUserUnAvailable) {
+                    itsCurrentPasswordTextField.setError("Enter correct password");
+                    return;
+                }
+                User anUser = aList.get(0);
+                if (anUser == null || !EncryptionUtil.validatePassword(aCurrentPasswordValue, anUser.getPassword())) {
                     itsCurrentPasswordTextField.setError("Enter correct password");
                     return;
                 }
 
                 // update the password in the database.
-                anUser.setPassword(aConfirmPassword);
+                anUser.setPassword(aHashedPassword);
                 anUserService.update(anUser);
             }
             Toast.makeText(getApplicationContext(), "Password changed successfully", Toast.LENGTH_LONG).show();

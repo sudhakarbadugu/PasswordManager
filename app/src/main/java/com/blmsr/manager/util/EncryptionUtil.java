@@ -21,9 +21,10 @@ public class EncryptionUtil {
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String originalPassword = "password";
         String generatedSecuredPasswordHash = generateStrongPasswordHash(originalPassword);
-        System.out.println(generatedSecuredPasswordHash);
+        String generatedSecuredPasswordHash1 = generateStrongPasswordHash(originalPassword);
+        System.out.println(generatedSecuredPasswordHash1);
         System.out.println("Encript : " + encrypt(originalPassword));
-        System.out.println("Decript : " + decrypt(originalPassword));
+        System.out.println("Decript : " + generatedSecuredPasswordHash);
 
 
     }
@@ -70,7 +71,9 @@ public class EncryptionUtil {
         }
     }
 
-    private static boolean validatePassword(String originalPassword, String storedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static boolean validatePassword(String originalPassword, String storedPassword) {
+        try {
+
         String[] parts = storedPassword.split(":");
         int iterations = Integer.parseInt(parts[0]);
         byte[] salt = fromHex(parts[1]);
@@ -85,6 +88,11 @@ public class EncryptionUtil {
             diff |= hash[i] ^ testHash[i];
         }
         return diff == 0;
+
+        } catch (Exception anException) {
+
+        }
+        return false;
     }
 
     private static byte[] fromHex(String hex) throws NoSuchAlgorithmException {

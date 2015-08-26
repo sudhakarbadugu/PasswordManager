@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +16,13 @@ import android.widget.EditText;
 import com.blmsr.manager.dao.UserService;
 import com.blmsr.manager.models.User;
 import com.blmsr.manager.service.DatabaseService;
+import com.blmsr.manager.util.EncryptionUtil;
 import com.blmsr.manager.util.StringUtils;
+
+import java.util.List;
 
 public class MainActivity extends Activity implements CategoryConstants {
     private EditText itsPasswordField;
-    private boolean isPasswordAvailable = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +36,6 @@ public class MainActivity extends Activity implements CategoryConstants {
 
         // add onCheckedListener on checkbox
         itsCbShowPwd.setOnCheckedChangeListener(itsOnCheckedChangeListener);
-
-        // Check the password available or not.
-        UserService anUserService = DatabaseService.getInstance(this).getUserService();
-        if (anUserService.getAllPasswords().isEmpty())
-        {
-            isPasswordAvailable = false;
-        }
 	}
 
     private CompoundButton.OnCheckedChangeListener itsOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -77,11 +73,6 @@ public class MainActivity extends Activity implements CategoryConstants {
 
 	public void showChangePasswordDialog(View tView) {
 		Intent anIntent = new Intent(this, ChangePasswordActivity.class);
-        if (!isPasswordAvailable)
-        {
-            // No passwords has set for the user so invisible the current password field.
-			anIntent.putExtra(CURRENT_PASSWORD_VISIBILITY, CURRENT_PASSWORD_VISIBILITY);
-		}
         startActivity(anIntent);
     }
 	public void performLogin(View v) {
@@ -95,11 +86,12 @@ public class MainActivity extends Activity implements CategoryConstants {
         }
 
 		UserService anUserService = DatabaseService.getInstance(this).getUserService();
-		User anUser = anUserService.getPassword(apwd.trim());
-        if (anUser == null)
+        List<User> aList = anUserService.getAllPasswords();
+
+        if (aList.isEmpty() || aList.get(0) == null || !EncryptionUtil.validatePassword(apwd.trim(), aList.get(0).getPassword()))
         {
-			aPwdField.setError("Set the correct password");
-			return;
+            aPwdField.setError("Enter the correct password");
+            return;
 		}
 
 		Intent anIntent = new Intent(MainActivity.this, CategoryHomeTabbedActivity.class);

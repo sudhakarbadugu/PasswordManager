@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".ChangePasswordActivity"
-            android:label="@string/title_editor" >
+            android:label="@string/action_change_password">
         </activity>
         <activity
             android:name=".CategoryEntriesEditorActivity"
