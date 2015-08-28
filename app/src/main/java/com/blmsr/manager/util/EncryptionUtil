@@ -1,0 +1,105 @@
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+
+public class EncryptionUtil
+{
+
+    // Key size must be 16 characters.
+    private static final String DEFAULT_KEY  = "PasswordSecretKy";
+
+    private static final String ENCODINGTYPE = "UTF-8";
+
+    /**
+     * Provides basic encryption on a String.
+     * @param theValue the String which need to be encrypted. 
+     * @return Returns The string in encrypted form in byte[] array.
+     */
+    public static byte[] encrypt(String theValue)
+    {
+        return encrypt(DEFAULT_KEY, theValue);
+    }
+
+    /*
+     * Provides basic encryption on a String.
+     * @param theValue the String which need to be encrypted. 
+     * @param theKeyValue the String which need to be used as key for encryption mechanism. It should be 16 characters only.
+     * @return Returns The string in encrypted form in byte[] array.
+     */
+    private static byte[] encrypt(String theKeyValue, String theValue)
+    {
+        byte[] aValue = new byte[0];
+        try
+        {
+
+            byte[] raw = theKeyValue.getBytes(ENCODINGTYPE);
+            if (raw.length != 16)
+            {
+                throw new IllegalArgumentException("Invalid key size.");
+            }
+
+            SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, skeySpec, new IvParameterSpec(new byte[16]));
+            return cipher.doFinal(theValue.getBytes(ENCODINGTYPE));
+
+        }
+        catch (Exception theException)
+        {
+            Log.e("Unable to encrypt the Value:" + theException);
+        }
+
+        return aValue;
+    }
+
+    /**
+     * Provides decryption of a String encrypted using encrypt()
+     * @param theEncryptedString The string in encrypted form in byte[] array.
+     * @return String the decrypted string.
+     */
+    public static String decrypt(byte[] theEncryptedString)
+    {
+        return decrypt(DEFAULT_KEY, theEncryptedString);
+    }
+
+    /*
+     * Provides decryption of a String which is encrypted already.
+     * @param theKeyValue the String which is given for encryption mechanism. It should be 16 characters only.
+     * @param theEncryptedString The string in encrypted form in byte[] array.
+     * @return  String the decrypted string.
+     */
+    private static String decrypt(String theKeyValue, byte[] theEncryptedString)
+    {
+        String aValue = new String(theEncryptedString);
+        try
+        {
+            byte[] raw = theKeyValue.getBytes(ENCODINGTYPE);
+            if (raw.length != 16)
+            {
+                throw new IllegalArgumentException("Invalid key size.");
+            }
+
+            SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, new IvParameterSpec(new byte[16]));
+            byte[] original = cipher.doFinal(theEncryptedString);
+
+            aValue = new String(original, ENCODINGTYPE);
+        }
+        catch (Exception theException)
+        {
+            Log.e("Unable to decrypt the Value:" + theException);
+        }
+
+        return aValue;
+    }
+
+    public static void main(String[] args)
+    {
+        byte[] ciphertext = encrypt(DEFAULT_KEY, "abcde");
+        System.out.println("Encrypted value" + new String(ciphertext));
+        System.out.println("Decrypted value:" + (decrypt(DEFAULT_KEY, ciphertext)));
+    }
+}
