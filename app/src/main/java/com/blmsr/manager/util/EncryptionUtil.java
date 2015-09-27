@@ -1,34 +1,23 @@
 package com.blmsr.manager.util;
 
-import android.util.Base64;
+import android.util.Log;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 /**
  * Created by LakshmiMadhav on 8/26/2015.
+ * This class has some utility methods to encrypt and decrypt.
+ * This class has the Message digestion methods to digest the text.
  */
 public class EncryptionUtil {
-
-    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String originalPassword = "password";
-        String generatedSecuredPasswordHash = generateStrongPasswordHash(originalPassword);
-        String generatedSecuredPasswordHash1 = generateStrongPasswordHash(originalPassword);
-        System.out.println(generatedSecuredPasswordHash1);
-        System.out.println("Encript : " + encrypt(originalPassword));
-        System.out.println("Decript : " + generatedSecuredPasswordHash);
-
-
-    }
-
+    private static final String CLASS_NAME = "EncryptionUtil";
+    private static final CryptoUtil CRYPTO_UTIL_INSTANCE = new CryptoUtil();
     /**
      * @param password
      * @return
@@ -47,6 +36,7 @@ public class EncryptionUtil {
             byte[] hash = skf.generateSecret(spec).getEncoded();
             aPassword = iterations + ":" + toHex(salt) + ":" + toHex(hash);
         } catch (Exception anException) {
+            Log.e(CLASS_NAME, " " + anException);
 
         }
 
@@ -74,23 +64,23 @@ public class EncryptionUtil {
     public static boolean validatePassword(String originalPassword, String storedPassword) {
         try {
 
-        String[] parts = storedPassword.split(":");
-        int iterations = Integer.parseInt(parts[0]);
-        byte[] salt = fromHex(parts[1]);
-        byte[] hash = fromHex(parts[2]);
+            String[] parts = storedPassword.split(":");
+            int iterations = Integer.parseInt(parts[0]);
+            byte[] salt = fromHex(parts[1]);
+            byte[] hash = fromHex(parts[2]);
 
-        PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        byte[] testHash = skf.generateSecret(spec).getEncoded();
+            PBEKeySpec spec = new PBEKeySpec(originalPassword.toCharArray(), salt, iterations, hash.length * 8);
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] testHash = skf.generateSecret(spec).getEncoded();
 
-        int diff = hash.length ^ testHash.length;
-        for (int i = 0; i < hash.length && i < testHash.length; i++) {
-            diff |= hash[i] ^ testHash[i];
-        }
-        return diff == 0;
+            int diff = hash.length ^ testHash.length;
+            for (int i = 0; i < hash.length && i < testHash.length; i++) {
+                diff |= hash[i] ^ testHash[i];
+            }
+            return diff == 0;
 
         } catch (Exception anException) {
-
+            Log.e(CLASS_NAME, " " + anException);
         }
         return false;
     }
@@ -103,48 +93,52 @@ public class EncryptionUtil {
         return bytes;
     }
 
-    static Cipher cipher;
+    private static byte[] iv =
+            {0x0a, 0x01, 0x02, 0x03, 0x04, 0x0b, 0x0c, 0x0d};
 
+    // Key size must be 16 characters.
+    private static final String DEFAULT_KEY = "PasswordBestKey";
 
-    public static String encrypt(String plainText) {
+    private static final String ENCODINGTYPE = "UTF-8";
+
+    /*
+     * Provides basic encryption on a String.
+     * @param theValue the String which need to be encrypted.
+     * @param theKeyValue the String which need to be used as key for encryption mechanism. It should be 16 characters only.
+     * @return Returns The string in encrypted form in byte[] array.
+     */
+    public static String encrypt(String theValue) {
         try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128);
-            SecretKey secretKey = keyGenerator.generateKey();
-            cipher = Cipher.getInstance("AES");
-            return encrypt(plainText, secretKey);
-        } catch (Exception anException) {
+            return CRYPTO_UTIL_INSTANCE.encrypt(DEFAULT_KEY, theValue);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return "";
     }
 
-    private static String encrypt(String plainText, SecretKey secretKey)
-            throws Exception {
-        byte[] plainTextByte = plainText.getBytes();
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] encryptedByte = cipher.doFinal(plainTextByte);
-        return toHex(encryptedByte);
-    }
-
-    public static String decrypt(String encryptedText) {
+    /**
+     * Provides decryption of a String encrypted using encrypt()
+     *
+     * @param theEncryptedString The string in encrypted form in byte[] array.
+     * @return String the decrypted string.
+     */
+    public static String decrypt(String theEncryptedString) {
         try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128);
-            SecretKey secretKey = keyGenerator.generateKey();
-            cipher = Cipher.getInstance("AES");
-            return decrypt(encryptedText, secretKey);
-        } catch (Exception anException) {
+            return CRYPTO_UTIL_INSTANCE.decrypt(DEFAULT_KEY, theEncryptedString);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return "";
     }
 
-    // TODO should re write the encode and de code methods.
-    private static String decrypt(String encryptedText, SecretKey secretKey)
-            throws Exception {
-        byte[] encryptedTextByte = fromHex(encryptedText);
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        byte[] decryptedByte = cipher.doFinal(encryptedTextByte);
-        String decryptedText = new String(decryptedByte);
-        return decryptedText;
+    public static void main(String[] args) throws Exception {
+        String plain = "test";
+        String enc = encrypt(plain);
+        System.out.println("Original text: " + plain);
+        System.out.println("Encrypted text: " + enc);
+        String plainAfter = decrypt(enc);
+        System.out.println("Original text after decryption: " + plainAfter);
     }
 }

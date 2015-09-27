@@ -1,3 +1,6 @@
+1.76 (26-08-15)
+- Used the common code lib for the encryption an decryption.
+
 1.74 (26-08-15)
 - Added info about the about dialog.
 
