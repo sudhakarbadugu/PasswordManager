@@ -1,12 +1,3 @@
-/*
- * Copyright 2015 Merge Healthcare Incorporated. All Rights Reserved.
- *
- * This software is property of Merge Healthcare Incorporated.
- * Unauthorized access to, copying or distribution of the software is
- * prohibited. The software and the intellectual property embodied herein
- * is protected by law, including without limitation the copyright laws
- * of the United States.
- */
 package com.blmsr.manager;
 
 import android.app.Activity;
