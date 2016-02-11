@@ -2,6 +2,7 @@ package com.blmsr.manager.dao.impl;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.blmsr.manager.dao.CategoryEntryService;
@@ -69,6 +70,23 @@ public class CategoryEntryServiceImpl implements CategoryEntryService,CategoryEn
         return count;
     }
 
+
+    @Override
+    public long delete(int theCategoryID) {
+        SQLiteDatabase database = sqliteController.getWritableDatabase();
+
+        // Which row to update, based on the ID
+        String selection = COLUMN_NAME_CATEGORY_ID + "= ?";
+
+        String[] selectionArgs = {String.valueOf(String.valueOf(theCategoryID))};
+
+        // Issue SQL statement.
+        int count = database.delete(TABLE_NAME, selection, selectionArgs);
+        database.close();
+
+        return count;
+    }
+
     @Override
     public List<CategoryEntry> getCategoryByID(int theCategoryID) {
         ArrayList<CategoryEntry> categoryEntriesList = new ArrayList<CategoryEntry>();
@@ -98,6 +116,18 @@ public class CategoryEntryServiceImpl implements CategoryEntryService,CategoryEn
 
         return categoryEntriesList;
     }
+
+    @Override
+    public boolean isCategoryEntriesExist(int theCategoryID) {
+        SQLiteDatabase database = sqliteController.getReadableDatabase();
+        String[] selectionArgs = {String.valueOf(theCategoryID)};
+        long isEmpty = DatabaseUtils.longForQuery(database, SQL_CATEGORY_ENTRIES_COUNT_ID, selectionArgs);
+        database.close();
+        return isEmpty > 0;
+    }
+
+
+
     @Override
     public List<CategoryEntry> getCategories() {
         ArrayList<CategoryEntry> categoryEntriesList = new ArrayList<CategoryEntry>();

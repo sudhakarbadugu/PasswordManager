@@ -1,3 +1,11 @@
+1.77 (04-10-15)
+- Added the opencsv lib support.
+- Added 'Export to CSV' option.
+- Implemented the functionality.
+- Removed the white color text in about dialog.
+- Added a warning message while removing the Category.
+- Fixed a bug: When removing category, It should remove all the category entries.
+
 1.76 (26-08-15)
 - Used the common code lib for the encryption an decryption.
 

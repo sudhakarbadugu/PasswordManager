@@ -9,6 +9,8 @@ import android.content.Context;
 public class Dialog {
     public static final String VALIDATION_MESSAGE_TITLE = "Validation";
     public static final String CONFIRM_MESSAGE_TITLE = "Save Entry?";
+    public static final String WARNING_MESSAGE_TITLE = "Warning!";
+    public static final String INFO_MESSAGE_TITLE = "Info!";
 
     public static AlertDialog showAlertDialog(Context theContext, String theTitle) {
         theTitle = StringUtils.isNullOrEmpty(theTitle) ? CONFIRM_MESSAGE_TITLE : theTitle;

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.blmsr.manager.adapter.TabsPagerAdapter;
+import com.blmsr.manager.dao.CategoryEntryService;
+import com.blmsr.manager.dao.CategoryService;
+import com.blmsr.manager.models.Category;
+import com.blmsr.manager.models.CategoryEntry;
+import com.blmsr.manager.service.DatabaseService;
+import com.blmsr.manager.util.Dialog;
+import com.blmsr.manager.util.ExportUtil;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * This TabbedActivity is responsible to show the Configure categories and its categories entries.
@@ -25,6 +37,12 @@ import com.blmsr.manager.adapter.TabsPagerAdapter;
 public class CategoryHomeTabbedActivity extends FragmentActivity implements ActionBar.TabListener, CategoryConstants {
     private ViewPager viewPager;
     private ActionBar actionBar;
+
+    /**
+     * Only supported format.
+     */
+    private static final String FILE_EXTENSION_NAME = ".csv";
+
     // Tab titles
     private String[] tabs = {CATEGORIES, CATEGORY_EDITOR};
 
@@ -95,6 +113,9 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
             case R.id.action_about:
                 showAbout();
                 return true;
+            case R.id.action_search:
+                showSearch();
+                return true;
             case R.id.action_lock:
                 lockApp();
                 return true;
@@ -102,9 +123,62 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
                 showChangePasswordDialog();
                 return true;
             case R.id.action_settings:
+                showSearch();
+                return true;
+            case R.id.action_export_csv:
+                exportDataToCSV();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showSearch() {
+        Intent anIntent = new Intent(this, SearchActivity.class);
+        startActivity(anIntent);
+    }
+
+    private void exportDataToCSV() {
+        CategoryService aCategoryService = DatabaseService.getInstance(this).getCategoryService();
+        CategoryEntryService aCategoryEntryService = DatabaseService.getInstance(this).getCategoryEntryService();
+        List<Category> aCategories = aCategoryService.getCategiries();
+        boolean isExported = true;
+
+        String filename = "csv";
+        File aFile = null;
+        FileOutputStream outputStream;
+        String fileName = "MyFile";
+        String content = "hello world";
+
+        try {
+            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(content.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            aFile = getDir("csv", Context.MODE_PRIVATE);
+            for (Category aCategory : aCategories) {
+                filename = aCategory.getCategoryName() + FILE_EXTENSION_NAME;
+                List<CategoryEntry> aCategoryEntries = aCategoryEntryService.getCategoryByID(aCategory.getCategoryId());
+                aFile = new File(aFile, filename);
+                if (!aFile.exists() && aFile.mkdirs()) {
+                    Log.e("HomePage", "failed create directories");
+                }
+//                ExportUtil.exportToCSV(aFile, ExportUtil.toStringArray(aCategoryEntries));
+            }
+        } catch (Exception anException) {
+            Dialog.showValidationMessageDialog(this, Dialog.WARNING_MESSAGE_TITLE, "Failed to export the files");
+            anException.printStackTrace();
+            Log.e("HomePage", "An exception occurred ", anException);
+            isExported = false;
+        }
+
+        if (isExported) {
+            Dialog.showValidationMessageDialog(this, Dialog.INFO_MESSAGE_TITLE, "Files exported successfully." +
+                    "Please find files in the following path: " + aFile.getPath());
         }
     }
 
@@ -127,7 +201,7 @@ public class CategoryHomeTabbedActivity extends FragmentActivity implements Acti
                 "This helps a user store and organize passwords. " +
                 "Password managers usually store passwords encrypted, requiring the user to create a master password;" +
                 "a single, ideally very strong password which grants the user access to their entire password database. " +
-                "Password manager is created by Sudhakar.B \n Version: 1.73\n" +
+                "Password manager is created by Sudhakar.B \n Version: 1.77 \n" +
                 "This was to keep your passwords in an encrypted vault");
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name);

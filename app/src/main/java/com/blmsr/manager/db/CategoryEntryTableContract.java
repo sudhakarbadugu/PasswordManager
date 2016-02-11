@@ -72,6 +72,33 @@ public interface CategoryEntryTableContract extends DatabaseConstants {
             COLUMN_NAME_FIELD_15
     };
 
+
+    /**
+     * Define a projection that specifies which columns from the database
+     * you will actually use after this query.
+     */
+    String CATEGORY_ENTRY_EXPORT_COLUMNS[] = {COLUMN_NAME_CATEGORY_NAME,
+            COLUMN_NAME_FIELD_1,
+            COLUMN_NAME_FIELD_2,
+            COLUMN_NAME_FIELD_3,
+            COLUMN_NAME_FIELD_4,
+            COLUMN_NAME_FIELD_5,
+            COLUMN_NAME_FIELD_6,
+            COLUMN_NAME_FIELD_7,
+            COLUMN_NAME_FIELD_8,
+            COLUMN_NAME_FIELD_9,
+            COLUMN_NAME_FIELD_10,
+            COLUMN_NAME_FIELD_11,
+            COLUMN_NAME_FIELD_12,
+            COLUMN_NAME_FIELD_13,
+            COLUMN_NAME_FIELD_14,
+            COLUMN_NAME_FIELD_15
+    };
+
+    /**
+     * query to count the no of entries based on the entry id from parent table.
+     */
+    String SQL_CATEGORY_ENTRIES_COUNT_ID = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME_CATEGORY_ID + " = ?";
     /**
      * Which row to update, based on the ID
       */

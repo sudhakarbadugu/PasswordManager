@@ -38,6 +38,7 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile 'commons-codec:commons-codec:20041127.091804'
+    compile 'net.sf.opencsv:opencsv:2.3'
 }
 
 dependencies {

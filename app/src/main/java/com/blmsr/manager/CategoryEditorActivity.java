@@ -1,6 +1,8 @@
 package com.blmsr.manager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,13 +20,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
 
+import com.blmsr.manager.dao.CategoryEntryService;
 import com.blmsr.manager.dao.CategoryService;
 import com.blmsr.manager.models.Category;
+import com.blmsr.manager.models.CategoryEntry;
 import com.blmsr.manager.service.DatabaseService;
 import com.blmsr.manager.util.Dialog;
 import com.blmsr.manager.util.StringUtils;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CategoryEditorActivity extends Activity implements CategoryConstants {
@@ -200,23 +205,67 @@ public class CategoryEditorActivity extends Activity implements CategoryConstant
      * performs the delete.
      */
     private void deleteCategory() {
-        CategoryService aCategoryService = DatabaseService.getInstance(this).getCategoryService();
-        Intent anIntent = getIntent();
-        if (EDIT_CATEGORY.equals(anIntent.getStringExtra(EDIT_CATEGORY))) {
-            Category aCategory = (Category) anIntent.getSerializableExtra(CATEGORY);
+        CategoryEntryService aCategoryEntryService = DatabaseService.getInstance(this).getCategoryEntryService();
+
+        final Intent[] anIntent = {getIntent()};
+        if (EDIT_CATEGORY.equals(anIntent[0].getStringExtra(EDIT_CATEGORY))) {
+            final Category aCategory = (Category) anIntent[0].getSerializableExtra(CATEGORY);
             if (aCategory == null) {
                 Log.d(CLASSNAME, "category model is null. Can't be deleted.");
                 return;
             }
 
+            boolean isCategoryEntriesExist = aCategoryEntryService.isCategoryEntriesExist(aCategory.getCategoryId());
+
+            if (isCategoryEntriesExist) {
+                new AlertDialog.Builder(this)
+                        .setTitle(Dialog.WARNING_MESSAGE_TITLE)
+                        .setMessage("This category is having entries. Do you want to delete " + aCategory.getCategoryName() + " entry and its entries? This can't be undone.")
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                            }
+                        })
+                        .setPositiveButton(R.string.delete_Category, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                //delete the entry
+                                performDelete();
+                            }
+                        }).create().show();
+
+                return;
+            }
+
+            // delete the entry
+            performDelete();
+        }
+    }
+
+    /**
+     * performs the actual delete. Delete the category_entries first then delete the category.
+     */
+    private void performDelete() {
+        final CategoryService aCategoryService = DatabaseService.getInstance(this).getCategoryService();
+        CategoryEntryService aCategoryEntryService = DatabaseService.getInstance(this).getCategoryEntryService();
+
+        final Intent[] anIntent = {getIntent()};
+        if (EDIT_CATEGORY.equals(anIntent[0].getStringExtra(EDIT_CATEGORY))) {
+            final Category aCategory = (Category) anIntent[0].getSerializableExtra(CATEGORY);
+            if (aCategory == null) {
+                Log.d(CLASSNAME, "category model is null. Can't be deleted.");
+                return;
+            }
+
+            // Delete all the category entries first then delete the category.
+            aCategoryEntryService.delete(aCategory.getCategoryId());
             aCategoryService.delete(aCategory);
             itsCategoriesNames.remove(aCategory.getCategoryName());
+            Toast.makeText(getApplicationContext(), "Category deleted successfully", Toast.LENGTH_LONG).show();
+            anIntent[0] = new Intent(CategoryEditorActivity.this, CategoryHomeTabbedActivity.class);
+            startActivity(anIntent[0]);
         }
-
-        Toast.makeText(getApplicationContext(), "Category deleted successfully", Toast.LENGTH_LONG).show();
-        anIntent = new Intent(this, CategoryHomeTabbedActivity.class);
-        startActivity(anIntent);
     }
+
 
     /**
      * Returns the model object. It gets the values from the EditText views and sets to the model.
